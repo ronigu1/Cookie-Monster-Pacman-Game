@@ -1,21 +1,197 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<script src="./jquery-3.4.1.slim.min.js"></script>
-		<script type="text/javascript" src="./app.js"></script>
-	</head>
 
-	<body>
-		<div id="score">
-			<label for="lblScore">SCORE:</label>
-			<input id="lblScore" type="text" />
+<head>
+	<script src="./JS/jquery-3.4.1.slim.min.js"></script>
+	<script type="text/javascript" src="./JS/app.js"></script>
+</head>
+
+<body>
+	<!--Header Section-->
+	<header>
+		<!--Add Logo-->
+		<h1>****Logo place - TO ADD****</h1>
+		<h2>CookieMan Game Made By</h2>
+		<h2>Roni Guz, ID's: 318256922 & Hodaya Takele, ID's: 316607258</h2>
+	</header>
+	<!--Menu Section-->
+	<nav id="menu">
+		<a id="welcome">Welcome</a>
+		<a id="signup">Sign Up</a>
+		<a id="login">Log In</a>
+		<a id="about">About</a>
+		<!--Add Mute/Unmute button-->
+	</nav>
+	<!--Contact Section- Switches base on user action -->
+	<div id="content">
+		<!--Welcome Page-->
+		<div id="welcome_page">
+			<h3>Welcome To The Cookie-Man Game</h3>
+			<h3>****Replace With Logo Image****</h3>
+			<h3>Please Sign Up or Log In To Start Playing</h3>
+			<button id="WSignUpButton" class="btn">Sign Up</button>
+			<button id="WLogInButton" class="btn">Log In</button>
 		</div>
-		<div id="time">
-			<label for="lblTime">TIME:</label>
-			<input id="lblTime" type="text" />
+
+		<!--Sign Up Page-->
+		<div id="signup_page">
+			<form>
+				<h3>Sign Up To The Cookie-Man Game</h3>
+				<h3>Please fill in this form to create an account:</h3>
+				<div class="signupInfoContainer">
+					<label for="lbUsernameInput">Username:</label>
+					<input id="lbUsernameInput" type="text" placeholder="Enter Your Username" required>
+				</div>
+				<div class="signupInfoContainer">
+					<label for="lbPasswordInput">Password:</label>
+					<input id="lbPasswordInput" type="password" minlength="6" placeholder="Enter Your Password"
+						required>
+				</div>
+				<div class="signupInfoContainer">
+					<label for="lbPasswordConInput">Confirm Password:</label>
+					<input id="lbPasswordConInput" type="text" placeholder="Confirm Your Password" required>
+				</div>
+				<div class="signupInfoContainer">
+					<label for="lbFirstNameInput">First Name:</label>
+					<input id="lbFirstNameInput" type="text" placeholder="Enter Your First Name" required>
+				</div>
+				<div class="signupInfoContainer">
+					<label for="lbSurnameInput">Surname:</label>
+					<input id="lbSurnameInput" type="text" placeholder="Enter Your Surname" required>
+				</div>
+				<div class="signupInfoContainer">
+					<label for="lbEmailInput">Email:</label>
+					<input id="lbEmailInput" type="email" placeholder="Enter Your Email Adress" required>
+				</div>
+				<div class="signupInfoContainer">
+					<label for="lbDateOfBirthInput">Date Of Birth:</label>
+					<input id="lbDateOfBirthInput" type="date" required>
+				</div>
+				<div id="SignUpButtons">
+					<button type="submit" class="btn">Sign Up</button>
+					<button type="reset" class="btn">Reset</button>
+				</div>
+			</form>
 		</div>
-		<div id="game">
-			<canvas id="canvas" height="600" width="600"></canvas>
+
+		<!--Login Page-->
+		<div id="login_page">
+			<form>
+				<h3>Log In To The Cookie-Man Game</h3>
+				<h3>Please fill in this Deatails to Log In To Your account:</h3>
+				<div class="signupInfoContainer">
+					<label for="lbUsernameLogin">Username:</label>
+					<input id="lbUsernameLogin" type="text" placeholder="Enter Your Username" required>
+				</div>
+				<div class="signupInfoContainer">
+					<label for="lbPasswordLogin">Password:</label>
+					<input id="lbPasswordLogin" type="text" placeholder="Enter Your Password" required>
+				</div>
+				<button type="submit" class="btn">Log In</button>
+			</form>
 		</div>
-	</body>
+
+		<!--Setting Page-->
+		<div id="setting_page">
+			<form>
+				<h3>Game Setting</h3>
+
+				<h3>Choose General Setting:</h3>
+				<div class="settingInfoContainer">
+					<label for="TimeInput">Game Time:</label>
+					<input id="TimeInput" type="number" min="60" value="60">
+				</div>
+				<div class="settingInfoContainer">
+					<label for="MonstersInput">Number of Monsters:</label>
+					<input id="BallsInput" type="number" min="1" max="4" value="1">
+				</div>
+				<div class="settingInfoContainer">
+					<label for="BallsInput">Number of Balls:</label>
+					<input id="BallsInput" type="number" min="50" max="90" value="50">
+				</div>
+				<h3>Choose Game Balls Color Keys By Pressing on the Keyboard:</h3>
+				<div class="settingInfoContainer">
+					<label for="5Color">5 Points Ball:</label>
+					<input id="5Color" type="color" value="#9D6538">
+					<label for="15Color">15 Points Ball:</label>
+					<input id="15Color" type="color" value="#CF9F6E">
+					<label for="25Color">25 Points Ball:</label>
+					<input id="25Color" type="color" value="#DABE99">
+				</div>
+
+				<h3>Choose Game Movement Keys By Pressing on the Keyboard:</h3>
+				<div class="settingInfoContainer">
+					<label for="UPKey">UP key:</label>
+					<input id="UPKey" type="text" value="UpArrow">
+				</div>
+				<div class="settingInfoContainer">
+					<label for="DOWNKey">DOWN Key:</label>
+					<input id="DOWNKey" type="text" value="DownArrow">
+				</div>
+				<div class="settingInfoContainer">
+					<label for="RIGHTKey">RIGHT Key:</label>
+					<input id="RIGHTKey" type="text" value="RightArrow">
+				</div>
+				<div class="settingInfoContainer">
+					<label for="LEFTKey">LEFT Key:</label>
+					<input id="LEFTKey" type="text" value="LeftArrow">
+				</div>
+
+				<div id="SettingButtons">
+					<button type="reset" class="btn">Reset</button>
+					<button type="button" class="btn">Random</button>
+					<button type="submit" class="btn">Start</button>
+				</div>
+			</form>
+		</div>
+
+		<!--Game Page-->
+		<div id="game_page">
+			<!--Game Status Section - Left Side-->
+			<div id="game_status">
+				<h3>Game Status</h3>
+				<div id="username">
+					<label for="lbUsername">User Name:</label>
+					<input id="lbUsername" type="text" />
+				</div>
+				<div id="highScore">
+					<label for="lbHighScore">High Score:</label>
+					<input id="lbHighScore" type="text" />
+				</div>
+				<div id="score">
+					<label for="lblScore">SCORE:</label>
+					<input id="lblScore" type="text" />
+				</div>
+				<div id="lifes">
+					<label for="lblLifesLeft">Lifes Left:</label>
+					<input id="lblLifesLeft" type="text" />
+				</div>
+				<div id="time">
+					<label for="lblTime">TIME:</label>
+					<input id="lblTime" type="text" />
+				</div>
+				<button id="newGameButton" class="btn">New Game</button>
+			</div>
+			<!--Game Section - Center-->
+			<div id="game">
+				<canvas id="canvas" height="600" width="600"></canvas>
+			</div>
+			<!--Game Setting Section - Right Side-->
+			<div id="game_setting">
+
+			</div>
+		</div>
+
+		<!--About Window - Model Dialog-->
+		<div id="about_window">
+		</div>
+	</div>
+
+	<!--Footer Section-->
+	<div id="footer">
+		<h3>Contact Information: Hodaya Takele - hodayat@post.bgu.ac.il, Roni Guz - ronigu@post.bgu.ac.il</h3>
+		<h3>Copyright &copy; 2022 Magic Team - No Rights Reserved</h3>
+	</div>
+</body>
+
 </html>
