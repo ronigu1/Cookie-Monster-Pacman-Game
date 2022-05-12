@@ -1,0 +1,7 @@
+function welcomeToSignUp(){
+
+}
+
+function welcomeToLogIn(){
+    
+}

@@ -4,10 +4,15 @@
 <head>
 	<script src="./JS/jquery-3.4.1.slim.min.js"></script>
 	<script type="text/javascript" src="./JS/app.js"></script>
+	<script type="text/javascript" src="./JS/menuController.js"></script>
+	<script type="text/javascript" src="./JS/siteControler.js"></script>
+
+
 </head>
 
 <body>
 	<!--Header Section-->
+	<!---->
 	<header>
 		<!--Add Logo-->
 		<h1>****Logo place - TO ADD****</h1>
@@ -16,10 +21,10 @@
 	</header>
 	<!--Menu Section-->
 	<nav id="menu">
-		<a id="welcome">Welcome</a>
-		<a id="signup">Sign Up</a>
-		<a id="login">Log In</a>
-		<a id="about">About</a>
+		<a id="welcome" onclick="showWelcome()">Welcome</a>
+		<a id="signup" onclick="showSignup()">Sign Up</a>
+		<a id="login" onclick="showLogin()">Log In</a>
+		<a id="about" onclick="showAbout()">About</a>
 		<!--Add Mute/Unmute button-->
 	</nav>
 	<!--Contact Section- Switches base on user action -->
@@ -68,8 +73,8 @@
 					<input id="lbDateOfBirthInput" type="date" required>
 				</div>
 				<div id="SignUpButtons">
-					<button type="submit" class="btn">Sign Up</button>
-					<button type="reset" class="btn">Reset</button>
+					<button id="suSubmit" type="submit" class="btn">Sign Up</button>
+					<button id="suReset" type="reset" class="btn">Reset</button>
 				</div>
 			</form>
 		</div>
@@ -87,7 +92,7 @@
 					<label for="lbPasswordLogin">Password:</label>
 					<input id="lbPasswordLogin" type="text" placeholder="Enter Your Password" required>
 				</div>
-				<button type="submit" class="btn">Log In</button>
+				<button id="liSubmit" type="submit" class="btn">Log In</button>
 			</form>
 		</div>
 
@@ -138,9 +143,9 @@
 				</div>
 
 				<div id="SettingButtons">
-					<button type="reset" class="btn">Reset</button>
-					<button type="button" class="btn">Random</button>
-					<button type="submit" class="btn">Start</button>
+					<button id="setReset" type="reset" class="btn">Reset</button>
+					<button id="setRandom" type="button" class="btn">Random</button>
+					<button id="setStart" type="submit" class="btn">Start</button>
 				</div>
 			</form>
 		</div>
