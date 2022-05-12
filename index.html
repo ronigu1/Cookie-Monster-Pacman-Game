@@ -4,9 +4,13 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="CSS/page.css">
 	<script src="./JS/jquery-3.4.1.slim.min.js"></script>
+	<script type="module" src="./JS/pagesControler.js"></script>
 	<script type="text/javascript" src="./JS/app.js"></script>
 	<script type="text/javascript" src="./JS/menuController.js"></script>
-	<script type="text/javascript" src="./JS/pagesControler.js"></script>
+	<script type="text/javascript" src="./JS/login.js"></script>
+	<script type="text/javascript" src="./JS/signUp.js"></script>
+	<script type="text/javascript" src="./JS/settings.js"></script>
+	<script type="module" src="./JS/welcome.js"></script>
 </head>
 
 <body>
@@ -50,18 +54,18 @@
 					<label for="lbPasswordInput">Password:</label>
 					<input id="lbPasswordInput" type="password" minlength="6" placeholder="Enter Your Password"
 						required>
+						<input type="checkbox" id="showHide">
+						<label for="showHide" id="showHideLabel">Show Password</label>
 				</div>
 				<div class="signInfoContainer">
 					<label for="lbPasswordConInput">Confirm Password:</label>
-					<input id="lbPasswordConInput" type="text" placeholder="Confirm Your Password" required>
+					<input id="lbPasswordConInput" type="password" placeholder="Confirm Your Password" required>
+					<input type="checkbox" id="showHideConfirm">
+					<label for="showHideConfirm" id="showHideLabelTwo">Show Password</label>
 				</div>
 				<div class="signInfoContainer">
-					<label for="lbFirstNameInput">First Name:</label>
-					<input id="lbFirstNameInput" type="text" placeholder="Enter Your First Name" required>
-				</div>
-				<div class="signInfoContainer">
-					<label for="lbSurnameInput">Surname:</label>
-					<input id="lbSurnameInput" type="text" placeholder="Enter Your Surname" required>
+					<label for="lbFullNameInput">Full Name:</label>
+					<input id="lbFullNameInput" type="text" placeholder="Enter Your Full Name" required>
 				</div>
 				<div class="signInfoContainer">
 					<label for="lbEmailInput">Email:</label>

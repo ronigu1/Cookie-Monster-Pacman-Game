@@ -1,7 +1,11 @@
-function welcomeToSignUp(){
 
+
+export function welcomeToSignUp(){
+    $("#welcome_page").hide();
+    $("#signup_page").show();
 }
 
-function welcomeToLogIn(){
-    
+export function welcomeToLogIn(){
+    $("#welcome_page").hide();
+    $("#login_page").show();
 }

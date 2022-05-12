@@ -7,6 +7,10 @@ var start_time;
 var time_elapsed;
 var interval;
 
+var users_passwors = {};
+
+
+
 $(document).ready(function() {
 	context = canvas.getContext("2d");
 	Start();
