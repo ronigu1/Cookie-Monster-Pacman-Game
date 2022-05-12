@@ -1,0 +1,151 @@
+body {
+    margin: 0;
+    padding: 0 0;
+    font-family: Calibri, sans-serif !important;
+    background-color: #93dfff;
+}
+
+.btn {
+    padding: 10px 16px;
+    width: 150px;
+    vertical-align: middle;
+    text-align: center;
+    border-radius: 5px;
+    border: #036e9d;
+    background-color: #036e9d;
+    color: white;
+    font-weight: bold;
+    font-size: large;
+    cursor: pointer;
+    transition: .5s all ease-in-out;
+}
+
+.btn:hover {
+    color: #036e9d !important;
+    background-color: white !important;
+    font-size: larger;
+    border-radius: 5px;
+}
+
+/* Header Section */
+header {
+    position: fixed;
+    top: 0;
+    display: inline-flex;
+    justify-content: center;
+    background-color: white;
+    width: 100%;
+}
+
+header img {
+    height: 120px;
+}
+
+/* Menu Section */
+nav {
+    top: 120px;
+    right: 0;
+    left: 0;
+    width: 100%;
+    position: fixed;
+    overflow: auto;
+    display: inline-flex;
+    background-color: white;
+    letter-spacing: 4px;
+    padding: 0px 0px !important;
+    box-shadow: 0 1px 10px 0 grey, 0 1px 5px 0 grey;
+    text-align: center !important;
+    justify-content: center;
+
+}
+
+.mBtn {
+    border: none;
+    padding: 8px 16px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-decoration: none;
+    text-align: center;
+    color: rgb(100, 100, 100);
+    font-weight: lighter;
+    font-size: large;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.mBtn:hover {
+    color: rgb(255, 255, 255) !important;
+    background-color: #ccc !important
+}
+
+/* Contact Section */
+#content {
+    padding-top: 170px;
+    padding-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    color: #036e9d;
+}
+
+.content_page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content_page h1 {
+    margin: 10px 0px;
+    padding: 0px 0px;
+}
+
+/* Welcome Section */
+#welcome_page h3 {
+    padding: 0px 0px;
+}
+
+#WButton {
+    padding-bottom: 8px;
+}
+
+/* SignUp Section */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.signInfoContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0px;
+    font-size: large;
+    font-weight: lighter;
+}
+
+.signInfoContainer input {
+    font-family: Calibri, sans-serif;
+    font-weight: lighter;
+    font-size: medium;
+}
+
+#SignButtons {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 18px 0px;
+}
+
+/* Footer Section */
+footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0 0;
+    font-weight: lighter;
+    font-size: small;
+    text-align: center;
+    background-color: #93dfff;
+}
+
+footer p {
+    margin: 3px 0px;
+}
