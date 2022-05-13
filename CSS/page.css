@@ -8,6 +8,7 @@ body {
 .btn {
     padding: 10px 16px;
     width: 150px;
+    height: 50px;
     vertical-align: middle;
     text-align: center;
     border-radius: 5px;
@@ -94,14 +95,21 @@ nav {
 }
 
 .content_page h1 {
-    margin: 10px 0px;
+    margin: 12px 0px;
+    padding: 0px 0px;
+}
+
+.content_page h3 {
+    margin: 0px 0px;
     padding: 0px 0px;
 }
 
 /* Welcome Section */
 #welcome_page h3 {
+    margin: 10px 0px;
     padding: 0px 0px;
 }
+
 
 #WButton {
     padding-bottom: 8px;
@@ -122,9 +130,21 @@ form {
 }
 
 .signInfoContainer input {
+    padding: 2px 1px;
     font-family: Calibri, sans-serif;
+    color: grey;
     font-weight: lighter;
     font-size: medium;
+    width: 160px;
+    height: 20px;
+}
+
+.showPass {
+    display: flex;
+    justify-content: end;
+    padding: 0px 0px;
+    font-size: small;
+    font-weight: lighter;
 }
 
 #SignButtons {

@@ -51,19 +51,6 @@
 					<input id="lbUsernameInput" type="text" placeholder="Enter Your Username" required>
 				</div>
 				<div class="signInfoContainer">
-					<label for="lbPasswordInput">Password:</label>
-					<input id="lbPasswordInput" type="password" minlength="6" placeholder="Enter Your Password"
-						required>
-						<input type="checkbox" id="showHide">
-						<label for="showHide" id="showHideLabel">Show Password</label>
-				</div>
-				<div class="signInfoContainer">
-					<label for="lbPasswordConInput">Confirm Password:</label>
-					<input id="lbPasswordConInput" type="password" placeholder="Confirm Your Password" required>
-					<input type="checkbox" id="showHideConfirm">
-					<label for="showHideConfirm" id="showHideLabelTwo">Show Password</label>
-				</div>
-				<div class="signInfoContainer">
 					<label for="lbFullNameInput">Full Name:</label>
 					<input id="lbFullNameInput" type="text" placeholder="Enter Your Full Name" required>
 				</div>
@@ -73,7 +60,24 @@
 				</div>
 				<div class="signInfoContainer">
 					<label for="lbDateOfBirthInput">Date Of Birth:</label>
-					<input id="lbDateOfBirthInput" type="date" required>
+					<input id="lbDateOfBirthInput" class="birthDay" type="date" required>
+				</div>
+				<div class="signInfoContainer">
+					<label for="lbPasswordInput">Password:</label>
+					<input id="lbPasswordInput" type="password" minlength="6" placeholder="Enter Your Password"
+						required>
+				</div>
+				<div class="showPass">
+					<input type="checkbox" id="showHide">
+					<label for="showHide" id="showHideLabel">Show Password</label>
+				</div>
+				<div class="signInfoContainer">
+					<label for="lbPasswordConInput">Confirm Password:</label>
+					<input id="lbPasswordConInput" type="password" placeholder="Confirm Your Password" required>
+				</div>
+				<div class="showPass">
+					<input type="checkbox" id="showHideConfirm">
+					<label for="showHideConfirm" id="showHideLabelTwo">Show Password</label>
 				</div>
 				<div id="SignButtons">
 					<button id="suSubmit" type="submit" class="btn">Sign Up</button>
