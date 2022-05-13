@@ -7,7 +7,8 @@ var start_time;
 var time_elapsed;
 var interval;
 
-var users_passwors = {};
+var users_passwords = {"k":"k"};
+var emailList=[];
 
 
 
