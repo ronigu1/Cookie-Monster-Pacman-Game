@@ -7,8 +7,8 @@ var start_time;
 var time_elapsed;
 var interval;
 
-var users_passwords;
-var emailList;
+// var users_passwords;
+// var emailList;
 
 var gameTime;
 var monstersNum;
@@ -17,11 +17,14 @@ var ColorBall5;
 var ColorBall15;
 var ColorBall25;
 
-
-$(document).ready(function() {
-	context = canvas.getContext("2d");
-	Start();
-});
+// if (typeof users_passwords == 'undefined') {
+// 	users_passwords = new Map([["k", "k"]]);
+// 	emailList = [];
+// }
+// $(document).ready(function() {
+// 	context = canvas.getContext("2d");
+// 	Start();
+// });
 
 function Start() {
 	board = new Array();
@@ -68,14 +71,14 @@ function Start() {
 	keysDown = {};
 	addEventListener(
 		"keydown",
-		function(e) {
+		function (e) {
 			keysDown[e.keyCode] = true;
 		},
 		false
 	);
 	addEventListener(
 		"keyup",
-		function(e) {
+		function (e) {
 			keysDown[e.keyCode] = false;
 		},
 		false

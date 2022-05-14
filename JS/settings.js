@@ -7,24 +7,26 @@ var upArrowName;
 var downArrowName;
 var leftArrowName;
 var rightArrowName;
-function settingsStartGame(){
+function settingsStartGame() {
     //set values
-    
+
     //validtion
     //start game:
     // $("#setting_page").hide();
     // $("#game_page").show();????
+    $("setting_page").hide();
+    Start();
 }
 
 
-function settingsRandom(){
+function settingsRandom() {
     //set values
     //start game:
     // $("#setting_page").hide();
     // $("#game_page").show();
 }
 
-function settingsReset(){
+function settingsReset() {
     //set valuse as dufults
 
 }
@@ -32,10 +34,10 @@ function settingsReset(){
 
 
 //set arrows
-function setUpKey(){}
+function setUpKey() { }
 
-function setDOWNKey(){}
+function setDOWNKey() { }
 
-function setRIGHTKey(){}
+function setRIGHTKey() { }
 
-function setLEFTKey(){}
+function setLEFTKey() { }
