@@ -7,9 +7,15 @@ var start_time;
 var time_elapsed;
 var interval;
 
-var users_passwords = {"k":"k"};
-var emailList=[];
+var users_passwords;
+var emailList;
 
+var gameTime;
+var monstersNum;
+var ballsNum;
+var ColorBall5;
+var ColorBall15;
+var ColorBall25;
 
 
 $(document).ready(function() {

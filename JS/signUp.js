@@ -1,5 +1,5 @@
 function signUpToLogIn(){
-    //validion
+    //validion    
     var userName = $("#lbUsernameInput").val();
     var password = $("#lbPasswordInput").val();
     var rePassword = $("#lbPasswordConInput").val();
@@ -24,43 +24,36 @@ function signUpToLogIn(){
         alert("full name should contain only letters" );
         return;
     }
-    console.log("dict:" + users_passwors);
-    console.log("emails:" + emailList);
+
     if(users_passwords.hasOwnProperty(userName))
     {
         alert("UserName already in use , please choose another one." );
         return;
     }
     //email
-    console.log("dict:" + users_passwors);
-    console.log("emails:" + emailList);
     if(emailList.includes(email)){
         alert("Email adress already in use , please choose another one.");
         return;
     }
     //add to dictionary
-    users_passwors[userName] = password;
+    console.log("dict Before:" + users_passwords.size);
+    console.log("emails Before:" + emailList);
+    users_passwords[userName] = password;
     // push to end of array
     emailList.push(email);
     // clear cells for next time
-    console.log("dict:" + users_passwors);
-    console.log("emails:" + emailList);
-    $("#lbUsernameInput").val('');
-    $("#lbPasswordInput").val('');
-    $("#lbPasswordConInput").val('');
-    $("#lbFullNameInput").val('');
-    $("#lbEmailInput").val('');
-    $("#lbDateOfBirthInput").val('');
+    console.log("dict After:" + users_passwords.size);
+    console.log("emails After:" + emailList);
+    // $("#lbUsernameInput").val('');
+    // $("#lbPasswordInput").val('');
+    // $("#lbPasswordConInput").val('');
+    // $("#lbFullNameInput").val('');
+    // $("#lbEmailInput").val('');
+    // $("#lbDateOfBirthInput").val('');
     //add to list
-    console.log("dict:" + users_passwors);
-    console.log("emails:" + emailList);
     $("#signup_page").hide();
     $("#login_page").show();
-
-
-    return;
-    
-
+    return;  
 }
 
 function showHideFunc()
@@ -86,7 +79,6 @@ function showHideFuncConfirm()
         $("#lbPasswordConInput").attr("type","password");
     }
 }
-
 
 function signUpReset(){
     //reset all cells
