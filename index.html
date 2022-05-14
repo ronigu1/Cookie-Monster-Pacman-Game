@@ -3,7 +3,6 @@
 
 <head>
 	<link rel="stylesheet" type="text/css" href="CSS/page.css">
-
 	<script src="./JS/jquery-3.4.1.slim.min.js"></script>
 	<script type="text/javascript" src="./JS/pagesControler.js"></script>
 	<script type="text/javascript" src="./JS/app.js"></script>
@@ -42,7 +41,7 @@
 		<!--Sign Up Page-->
 		<div id="signup_page" class="content_page">
 			<h1>Sign Up To The Cookie-Man Game</h1>
-			<form>
+			<form onsubmit="return false">
 				<h3>Please fill in this form to create an account:</h3>
 				<div class="signInfoContainer">
 					<label for="lbUsernameInput">Username:</label>
@@ -78,7 +77,7 @@
 					<label for="showHideConfirm" id="showHideLabelTwo">Show Password</label>
 				</div>
 				<div id="SignButtons">
-					<button id="suSubmit" class="btn">Sign Up</button>
+					<button id="suSubmit" type="button" class="btn">Sign Up</button>
 					<button id="suReset" type="reset" class="btn">Reset</button>
 				</div>
 			</form>
@@ -88,7 +87,7 @@
 		<div id="login_page" class="content_page">
 			<h1>Log In To The Cookie-Man Game</h1>
 			<h3>Please fill in this Deatails to Log In To Your account:</h3>
-			<form>
+			<form onsubmit="return false">
 				<div class="signInfoContainer">
 					<label for="lbUsernameLogin">Username:</label>
 					<input id="lbUsernameLogin" type="text" placeholder="Enter Your Username" required>
@@ -98,14 +97,14 @@
 					<input id="lbPasswordLogin" type="text" placeholder="Enter Your Password" required>
 				</div>
 				<div id="SignButtons">
-					<button id="liSubmit" class="btn">Log In</button>
+					<button id="liSubmit" type="button" class="btn">Log In</button>
 				</div>
 			</form>
 		</div>
 
 		<!--Setting Page-->
 		<div id="setting_page" class="content_page">
-			<form>
+			<form onsubmit="return false">
 				<h3>Game Setting</h3>
 
 				<h3>Choose General Setting:</h3>
@@ -152,7 +151,7 @@
 				<div id="SettingButtons">
 					<button id="setReset" type="reset" class="btn">Reset</button>
 					<button id="setRandom" type="button" class="btn">Random</button>
-					<button id="setStart" type="submit" class="btn">Start</button>
+					<button id="setStart" type="button" class="btn">Start</button>
 				</div>
 			</form>
 		</div>
@@ -207,6 +206,7 @@
 		</p>
 	</footer>
 </body>
+
 <script type="text/javascript" src="./JS/welcome.js"></script>
 <script type="text/javascript" src="./JS/signUp.js"></script>
 <script type="text/javascript" src="./JS/login.js"></script>

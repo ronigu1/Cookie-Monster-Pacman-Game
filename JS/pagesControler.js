@@ -1,6 +1,5 @@
-// import { welcomeToSignUp, welcomeToLogIn } from "./welcome.js"
-var users_passwords = new Map([["k", "k"]]);
-var emailList = ["k@k.com"];
+var users_passwords = new Map([["k", "k"]]), emailList = [""];
+var emailList = [""];
 
 $(document).ready(function () {
     $("#signup_page").hide();
@@ -20,7 +19,7 @@ $(document).ready(function () {
     $("#showHideConfirm").click(showHideFuncConfirm);
 
     //triggers in logIn page:
-    //$("#liSubmit").click(logInToSettings);
+    $("#liSubmit").click(logInToSettings);
 
     //triggers in settings:
     $("#setStart").click(settingsStartGame);
