@@ -78,6 +78,10 @@ nav {
     background-color: #ccc !important
 }
 
+.gameImg {
+    display: none;
+}
+
 /* Contact Section */
 #content {
     padding-top: 170px;
@@ -128,7 +132,7 @@ form {
     font-weight: lighter;
 }
 
-.signInfoContainer input {
+input {
     padding: 2px 1px;
     font-family: Calibri, sans-serif;
     color: grey;
@@ -140,17 +144,99 @@ form {
 
 .showPass {
     display: flex;
-    justify-content: end;
+    justify-content: right;
     padding: 0px 0px;
     font-size: small;
-    font-weight: lighter;
+    /* text-align: center; */
 }
 
-#SignButtons {
+.SHCheckbox {
+    padding: 0 0;
+    width: 5%;
+    height: 11px;
+}
+
+.SignButtons {
     display: flex;
     justify-content: space-evenly;
     padding: 18px 0px;
 }
+
+
+/* Log In - Section */
+#login_form {
+    width: 65%;
+}
+
+/* Setting - Section */
+#setting_form {
+    width: 100%;
+    font-size: large;
+    font-weight: lighter;
+}
+
+#setting_form h3 {
+    padding-top: 12px;
+    padding-bottom: 2px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.settingInfoContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    padding-left: 3px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.generalSetting input {
+    width: 20%;
+}
+
+.MonsterInputContainer {
+    display: inline-flex;
+    justify-content: space-evenly;
+}
+
+.MonsterInputContainer input {
+    width: 70px;
+    height: 70px;
+    border-radius: 5px;
+    border-color: grey;
+    border-style: solid;
+    border: 0;
+}
+
+/* .MonsterInputContainer input:hover {
+    width: 74px;
+    height: 74px;
+} */
+
+/* .MonsterInputContainer input:focus {
+    border: 1px solid grey;
+
+} */
+
+.ballsColorContainer {
+    display: inline-flex;
+    justify-content: center;
+}
+
+.ballsColorContainer label {
+    padding-left: 15px;
+    padding-right: 5px !important;
+}
+
+.ballColorInput {
+    width: 40px;
+    height: 20px;
+    border: 1px solid grey;
+    padding: 0 0;
+    margin: 0 0;
+}
+
 
 /* Footer Section */
 footer {

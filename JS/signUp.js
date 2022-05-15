@@ -50,8 +50,10 @@ function signUpToLogIn() {
 
     alert("Welcome to the Cookie-Man game. please Login to your new account");
     //add to list
+
     $("#signup_page").hide();
     $("#login_page").show();
+    document.getElementById('signup_form').reset()
     // return;
 
 }

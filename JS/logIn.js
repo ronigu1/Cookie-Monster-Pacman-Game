@@ -16,4 +16,16 @@ function logInToSettings() {
 
     $("#login_page").hide();
     $("#setting_page").show();
+    document.getElementById('login_form').reset()
+}
+
+
+function showHideLoginFunc() {
+    var firstPass = $("#lbPasswordLogin").attr("type");
+    if (firstPass == "password") {
+        $("#lbPasswordLogin").attr("type", "text");
+    }
+    else {
+        $("#lbPasswordLogin").attr("type", "password");
+    }
 }

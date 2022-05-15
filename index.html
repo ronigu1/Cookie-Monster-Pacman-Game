@@ -9,6 +9,15 @@
 </head>
 
 <body>
+	<img id="ElmoMonster" class="gameImg" src="./Media/Images/ElmoMonster.png">
+	<img id="BigBirdMonster" class="gameImg" src="./Media/Images/BigBirdMonster.png">
+	<img id="IrvineMonster" class="gameImg" src="./Media/Images/IrvineMonster.png">
+	<img id="GroverMonster" class="gameImg" src="./Media/Images/GroverMonster.png">
+	<img id="BonusCookie" class="gameImg" src="./Media/Images/BonusCookie.png">
+	<img id="BonusLife" class="gameImg" src="./Media/Images/BonusLife.png">
+	<img id="CookieMan" class="gameImg" src="./Media/Images/CookieMan.png">
+	<img id="Surprise" class="gameImg" src="./Media/Images/Surprise.png">
+
 	<!--Header Section-->
 	<!---->
 	<header id="page-header">
@@ -41,7 +50,7 @@
 		<!--Sign Up Page-->
 		<div id="signup_page" class="content_page">
 			<h1>Sign Up To The Cookie-Man Game</h1>
-			<form onsubmit="return false">
+			<form id="signup_form" onsubmit="return false">
 				<h3>Please fill in this form to create an account:</h3>
 				<div class="signInfoContainer">
 					<label for="lbUsernameInput">Username:</label>
@@ -65,7 +74,7 @@
 						required>
 				</div>
 				<div class="showPass">
-					<input type="checkbox" id="showHide">
+					<input type="checkbox" id="showHide" class="SHCheckbox">
 					<label for="showHide" id="showHideLabel">Show Password</label>
 				</div>
 				<div class="signInfoContainer">
@@ -73,10 +82,10 @@
 					<input id="lbPasswordConInput" type="password" placeholder="Confirm Your Password" required>
 				</div>
 				<div class="showPass">
-					<input type="checkbox" id="showHideConfirm">
+					<input type="checkbox" id="showHideConfirm" class="SHCheckbox">
 					<label for="showHideConfirm" id="showHideLabelTwo">Show Password</label>
 				</div>
-				<div id="SignButtons">
+				<div class="SignButtons">
 					<button id="suSubmit" type="button" class="btn">Sign Up</button>
 					<button id="suReset" type="reset" class="btn">Reset</button>
 				</div>
@@ -87,16 +96,20 @@
 		<div id="login_page" class="content_page">
 			<h1>Log In To The Cookie-Man Game</h1>
 			<h3>Please fill in this Deatails to Log In To Your account:</h3>
-			<form onsubmit="return false">
+			<form id="login_form" onsubmit="return false">
 				<div class="signInfoContainer">
 					<label for="lbUsernameLogin">Username:</label>
 					<input id="lbUsernameLogin" type="text" placeholder="Enter Your Username" required>
 				</div>
 				<div class="signInfoContainer">
 					<label for="lbPasswordLogin">Password:</label>
-					<input id="lbPasswordLogin" type="text" placeholder="Enter Your Password" required>
+					<input id="lbPasswordLogin" type="password" placeholder="Enter Your Password" required>
 				</div>
-				<div id="SignButtons">
+				<div class="showPass">
+					<input type="checkbox" id="showHideLogin" class="SHCheckbox">
+					<label for="showHideLogin" id="showHideLoginlb">Show Password</label>
+				</div>
+				<div class="SignButtons">
 					<button id="liSubmit" type="button" class="btn">Log In</button>
 				</div>
 			</form>
@@ -104,51 +117,61 @@
 
 		<!--Setting Page-->
 		<div id="setting_page" class="content_page">
-			<form onsubmit="return false">
-				<h3>Game Setting</h3>
+			<h1>Game Setting</h1>
 
-				<h3>Choose General Setting:</h3>
-				<div class="settingInfoContainer">
+			<form id="setting_form" onsubmit="return false">
+				<h3>Choose General Game Setting:</h3>
+
+				<div class="settingInfoContainer generalSetting">
 					<label for="TimeInput">Game Time:</label>
 					<input id="TimeInput" type="number" min="60" value="60">
 				</div>
-				<div class="settingInfoContainer">
-					<label for="MonstersInput">Number of Monsters:</label>
-					<input id="MonstersInput" type="number" min="1" max="4" value="1">
-				</div>
-				<div class="settingInfoContainer">
-					<label for="BallsInput">Number of Balls:</label>
+				<div class="settingInfoContainer generalSetting">
+					<label for="BallsInput">Number of Balls(50-90):</label>
 					<input id="BallsInput" type="number" min="50" max="90" value="50">
 				</div>
-				<h3>Choose Game Balls Color Keys By Pressing on the Keyboard:</h3>
-				<div class="settingInfoContainer">
+
+				<h3>Choose Your Pursuers(1-4):</h3>
+				<div class="MonsterInputContainer">
+					<input type="image" id="ElmoInput" src="./Media/Images/ElmoMonster.png" class="MonsterInput" alt="5"
+						onclick="selectMonster(this)">
+					<input type="image" id="BigBirdInput" src="./Media/Images/BigBirdMonster.png" class="MonsterInput"
+						alt="5" onclick="selectMonster(this)">
+					<input type="image" id="IrvineInput" src="./Media/Images/IrvineMonster.png" class="MonsterInput"
+						alt="5" onclick="selectMonster(this)">
+					<input type="image" id="GroverInput" src="./Media/Images/GroverMonster.png" class="MonsterInput"
+						alt="5" onclick="selectMonster(this)">
+				</div>
+
+				<h3>Choose Game Balls Color:</h3>
+				<div class="ballsColorContainer">
 					<label for="5Color">5 Points Ball:</label>
-					<input id="5Color" type="color" value="#9D6538">
+					<input id="5Color" class="ballColorInput" type="color" value="#9D6538">
 					<label for="15Color">15 Points Ball:</label>
-					<input id="15Color" type="color" value="#CF9F6E">
+					<input id="15Color" class="ballColorInput" type="color" value="#CF9F6E">
 					<label for="25Color">25 Points Ball:</label>
-					<input id="25Color" type="color" value="#DABE99">
+					<input id="25Color" class="ballColorInput" type="color" value="#DABE99">
 				</div>
 
 				<h3>Choose Game Movement Keys By Pressing on the Keyboard:</h3>
 				<div class="settingInfoContainer">
 					<label for="UPKey">UP key:</label>
-					<input id="UPKey" type="text" value="UpArrow">
+					<input id="UPKey" type="text" value="ArrowUp">
 				</div>
 				<div class="settingInfoContainer">
 					<label for="DOWNKey">DOWN Key:</label>
-					<input id="DOWNKey" type="text" value="DownArrow">
+					<input id="DOWNKey" type="text" value="ArrowDown">
 				</div>
 				<div class="settingInfoContainer">
 					<label for="RIGHTKey">RIGHT Key:</label>
-					<input id="RIGHTKey" type="text" value="RightArrow">
+					<input id="RIGHTKey" type="text" value="ArrowRight">
 				</div>
 				<div class="settingInfoContainer">
 					<label for="LEFTKey">LEFT Key:</label>
-					<input id="LEFTKey" type="text" value="LeftArrow">
+					<input id="LEFTKey" type="text" value="ArrowLeft">
 				</div>
 
-				<div id="SettingButtons">
+				<div class="SignButtons">
 					<button id="setReset" type="reset" class="btn">Reset</button>
 					<button id="setRandom" type="button" class="btn">Random</button>
 					<button id="setStart" type="button" class="btn">Start</button>
