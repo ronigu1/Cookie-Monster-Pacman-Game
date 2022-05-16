@@ -100,13 +100,14 @@ function goToGame() {
     var startGameCon = confirm("Would you like the start the game with the chosen settings?");
     if (startGameCon == true) {
         // Update Finale app setting 
-        gameTime = timeChosen;
-        ballsNum = numOfBalls;
-        monstersNum = numberOfMonsters;
-        choseenMonster = monsters;
-        color5Ball = ballColor5;
-        colo15rBall = ballColor15;
-        color25Ball = ballColor25;
+        updateGamePage();
+        // gameTime = timeChosen;
+        // ballsNum = numOfBalls;
+        // monstersNum = numberOfMonsters;
+        // choseenMonster = monsters;
+        // color5Ball = ballColor5;
+        // colo15rBall = ballColor15;
+        // color25Ball = ballColor25;
         resetSettings();
         $("#setting_page").hide();
         $("#game_page").show();
@@ -114,6 +115,37 @@ function goToGame() {
         return;
     }
     return;
+}
+
+function updateGamePage() {
+    gameTime = timeChosen;
+    ballsNum = numOfBalls;
+    monstersNum = numberOfMonsters;
+    choseenMonster = monsters;
+    color5Ball = ballColor5;
+    colo15rBall = ballColor15;
+    color25Ball = ballColor25;
+
+    $("#timeSet").attr("value", timeChosen);
+    $("#Balls").attr("value", numOfBalls);
+    document.getElementById('5BallColor').style.backgroundColor = ballColor5;
+    document.getElementById('15BallColor').style.backgroundColor = ballColor15;
+    document.getElementById('25BallColor').style.backgroundColor = ballColor25;
+    $("#UPKeySet").attr("value", upArrowName);
+    $("#DOWNKeySet").attr("value", downArrowName);
+    $("#RIGHTKeySet").attr("value", rightArrowName);
+    $("#LEFTKeySet").attr("value", leftArrowName);
+    var counter = 1
+    for (let [key, value] of monsters.entries()) {
+        if (value == true) {
+            var imgSrc = $("#" + key).attr("src")
+            $("#monster" + counter).attr("src", imgSrc);
+            // $("#monster" + counter).attr("display", "block");
+            document.getElementById("monster" + counter).style.display = "block";
+            counter++;
+        }
+    }
+
 }
 
 function resetSettings() {

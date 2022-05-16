@@ -39,24 +39,27 @@ function showLogin() {
         // stopGame();
     }
 }
-// function showSetting(){
-//     if (document.getElementById("setting_page").style.display == "none"){
-//         $(welcome_page).hide();
-//         $(signup_page).hide();
-//         $(login_page).hide();
-//         $(game_page).hide();
-//         $(setting_page).show();
-//         // stopGame();
-//     }
-// }
 
-// function showGame(){
-//     if (document.getElementById("game_page").style.display == "none"){
-//         $(welcome_page).hide();
-//         $(signup_page).hide();
-//         $(login_page).hide();
-//         $(setting_page).hide();
-//         $(game_page).show();
-//         // stopGame();
-//     }
-// }
+function showAbout() {
+    document.getElementById("about_window").style.display = 'block';
+}
+
+function hideAbout() {
+    document.getElementById("about_window").style.display = 'none';
+}
+
+var modal = document.getElementById("about_window");
+
+// Close about window after pressing outside of the modal
+window.onclick = function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+// Close about window after pressing esc
+window.addEventListener('keydown', function (event) {
+    if (event.key == 'Escape') {
+        modal.style.display = "none";
+    }
+})

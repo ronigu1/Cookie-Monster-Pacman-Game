@@ -1,0 +1,72 @@
+#game_page {
+    display: inline-flex;
+    width: 100%;
+    height: 400px;
+    justify-content: space-between;
+    margin: 1%;
+}
+
+#game_status {
+    width: 15%;
+}
+
+#lifesLeftDiv {
+    display: inline-flex;
+    width: 100%;
+}
+
+#lifesLeftDiv img {
+    width: 20%;
+}
+
+/* #game {
+    position: relative;
+    width: 50%;
+    border: 1px;
+} */
+
+/* .canvas {
+    position: absolute;
+    width: 100%;
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+} */
+
+
+#game_page h3,
+h4 {
+    margin: 0 0;
+    padding: 0 0;
+}
+
+#game_page input {
+    background-color: #93dfff;
+    border: 0;
+    width: 80px;
+    cursor: context-menu;
+    padding: 0px 0px !important;
+    margin: 0px 0px !important;
+}
+
+#game_page input:focus {
+    outline: none;
+}
+
+.MonsterContainer input {
+    width: 40px !important;
+    height: 40px;
+    display: none;
+
+}
+
+
+
+.MonsterContainer {
+    display: inline-flex;
+}
+
+/* .MonsterContainer input {
+    width: 25%;
+
+} */

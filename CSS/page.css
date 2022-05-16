@@ -209,15 +209,6 @@ input {
     border: 0;
 }
 
-/* .MonsterInputContainer input:hover {
-    width: 74px;
-    height: 74px;
-} */
-
-/* .MonsterInputContainer input:focus {
-    border: 1px solid grey;
-
-} */
 
 .ballsColorContainer {
     display: inline-flex;

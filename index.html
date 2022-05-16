@@ -3,6 +3,9 @@
 
 <head>
 	<link rel="stylesheet" type="text/css" href="CSS/page.css">
+	<link rel="stylesheet" type="text/css" href="CSS/aboutModal.css">
+	<link rel="stylesheet" type="text/css" href="CSS/game.css">
+
 	<script src="./JS/jquery-3.4.1.slim.min.js"></script>
 	<script type="text/javascript" src="./JS/pagesControler.js"></script>
 	<script type="text/javascript" src="./JS/app.js"></script>
@@ -17,7 +20,9 @@
 	<img id="BonusLife" class="gameImg" src="./Media/Images/BonusLife.png">
 	<img id="CookieMan" class="gameImg" src="./Media/Images/CookieMan.png">
 	<img id="Surprise" class="gameImg" src="./Media/Images/Surprise.png">
-
+	<iframe width="0" height="0" src="https://www.youtube.com/embed/h_xe5UGpECU" title="YouTube video player"
+		frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+		allowfullscreen></iframe>
 	<!--Header Section-->
 	<!---->
 	<header id="page-header">
@@ -133,14 +138,14 @@
 
 				<h3>Choose Your Pursuers(1-4):</h3>
 				<div class="MonsterInputContainer">
-					<input type="image" id="ElmoInput" src="./Media/Images/ElmoMonster.png" class="MonsterInput" alt="5"
+					<input type="image" id="ElmoInput" src="./Media/Images/ElmoMonster.png" class="MonsterInput"
 						onclick="selectMonster(this)">
 					<input type="image" id="BigBirdInput" src="./Media/Images/BigBirdMonster.png" class="MonsterInput"
-						alt="5" onclick="selectMonster(this)">
+						onclick="selectMonster(this)">
 					<input type="image" id="IrvineInput" src="./Media/Images/IrvineMonster.png" class="MonsterInput"
-						alt="5" onclick="selectMonster(this)">
+						onclick="selectMonster(this)">
 					<input type="image" id="GroverInput" src="./Media/Images/GroverMonster.png" class="MonsterInput"
-						alt="5" onclick="selectMonster(this)">
+						onclick="selectMonster(this)">
 				</div>
 
 				<h3>Choose Game Balls Color:</h3>
@@ -186,40 +191,130 @@
 				<h3>Game Status</h3>
 				<div id="username">
 					<label for="lbUsername">User Name:</label>
-					<input id="lbUsername" type="text" />
+					<input id="lbUsername" type="text" readonly="readonly">
 				</div>
 				<div id="highScore">
 					<label for="lbHighScore">High Score:</label>
-					<input id="lbHighScore" type="text" />
+					<input id="lbHighScore" type="text" readonly="readonly">
 				</div>
 				<div id="score">
 					<label for="lblScore">SCORE:</label>
-					<input id="lblScore" type="text" />
+					<input id="lblScore" type="text" readonly="readonly">
 				</div>
 				<div id="lifes">
 					<label for="lblLifesLeft">Lifes Left:</label>
-					<input id="lblLifesLeft" type="text" />
+					<div id="lifesLeftDiv">
+						<img id="life1" src="./Media/Images/BonusLife.png">
+						<img id="life2" src="./Media/Images/BonusLife.png">
+						<img id="life3" src="./Media/Images/BonusLife.png">
+						<img id="life4" src="./Media/Images/BonusLife.png">
+						<img id="life5" src="./Media/Images/BonusLife.png">
+					</div>
 				</div>
 				<div id="time">
 					<label for="lblTime">TIME:</label>
-					<input id="lblTime" type="text" />
+					<input id="lblTime" type="text" readonly="readonly">
 				</div>
 				<button id="newGameButton" class="btn">New Game</button>
 			</div>
 			<!--Game Section - Center-->
 			<div id="game">
-				<canvas id="canvas" height="600" width="600"></canvas>
+				<canvas id="canvas" height="400" width="400"></canvas>
 			</div>
 			<!--Game Setting Section - Right Side-->
 			<div id="game_setting">
+				<h3>Game Setting</h3>
+				<!-- <form id="setting_form" onsubmit="return false"> -->
+				<h4>General Game Setting:</h4>
 
+				<div class="generalSettingContainer">
+					<label for="timeSet">Game Time:</label>
+					<input id="timeSet" type="text" readonly="readonly">
+				</div>
+				<div class="generalSettingContainer">
+					<label for="Balls">Number of Balls:</label>
+					<input id="Balls" type="text" readonly="readonly">
+				</div>
+
+				<h4>Your Pursuers:</h4>
+				<div class="MonsterContainer">
+					<input type="image" id="monster1" class="Monster" readonly="readonly">
+					<input type="image" id="monster2" class="Monster" readonly="readonly">
+					<input type="image" id="monster3" class="Monster" readonly="readonly">
+					<input type="image" id="monster4" class="Monster" readonly="readonly">
+				</div>
+
+				<h4>Game Balls Color:</h4>
+				<div class="ballColorContainer">
+					<label for="5BallColor">5 Points Ball:</label>
+					<input id="5BallColor" class="ballColor" type="text" readonly="readonly">
+				</div>
+				<div class="ballColorContainer">
+					<label for="15BallColor">15 Points Ball:</label>
+					<input id="15BallColor" class="ballColor" type="text" readonly="readonly">
+				</div>
+				<div class="ballColorContainer">
+					<label for="25BallColor">25 Points Ball:</label>
+					<input id="25BallColor" class="ballColor" type="text" readonly="readonly">
+				</div>
+
+
+				<h4>Game Movement Keys:</h4>
+				<div class="keysContainer">
+					<label for="UPKeySet">UP key:</label>
+					<input id="UPKeySet" type="text" readonly="readonly">
+				</div>
+				<div class="keysContainer">
+					<label for="DOWNKeySet">DOWN Key:</label>
+					<input id="DOWNKeySet" type="text" readonly="readonly">
+				</div>
+				<div class="keysContainer">
+					<label for="RIGHTKeySet">RIGHT Key:</label>
+					<input id="RIGHTKeySet" type="text" readonly="readonly">
+				</div>
+				<div class="keysContainer">
+					<label for="LEFTKeySet">LEFT Key:</label>
+					<input id="LEFTKeySet" type="text" readonly="readonly">
+				</div>
+				<!-- </form> -->
 			</div>
 		</div>
 
 		<!--About Window - Model Dialog-->
-		<div id="about_window">
+		<div id="about_window" class="modal" role="dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title">About Our Game</h1>
+					<span class="close" aria-hidden="true" onclick="hideAbout()">&times;</span>
+				</div>
+				<div class='sub-header'>
+					<h4>Developed by Roni Guz and Hodaya Takele </h4>
+				</div>
+				<div class="modal-body">
+					<p>
+						<center>Welcome to the best version of the Pac-Man game!</center>
+						<br>
+						The Sesame Street gang is having a party and the cookie monster is on the run trying to eat
+						as many cookies as possible.
+						Elmo and other friends are trying to stop him before he eats everything.
+						If you want to be a winner and not a sore loser you need to help the Cookie-Man escape from
+						his friends, eat cookies and gain at least 100 points before the time stop.
+						<br>
+						<center>Good Lock!</center>
+					</p>
+				</div>
+				<div class="modal-ans">
+					<p>
+						Our main struggles: Designing the site took us a lot of time.
+						Understanding the right flow to manage the different content sections, Implementing the logic,
+						and making it work. We also had a problem with the game board, timing, and scaling of the
+						different objects to fit on the board.
+					</p>
+				</div>
+			</div>
 		</div>
 	</div>
+
 	<!--Footer Section-->
 	<footer>
 		<p>

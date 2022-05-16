@@ -6,6 +6,7 @@ $(document).ready(function () {
     $("#login_page").hide();
     $("#setting_page").hide();
     $("#game_page").hide();
+    $("#about_window").hide();
 
 
     //triggers in welcome page:
