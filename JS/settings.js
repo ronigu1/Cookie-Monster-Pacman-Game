@@ -1,5 +1,9 @@
-var gameTime;
+var timeChosen;
 var numOfBalls;
+
+var ballColor5;
+var ballColor15;
+var ballColor25;
 
 var upArrow;
 var dowArrow;
@@ -14,14 +18,18 @@ var leftArrowName;
 
 var numberOfMonsters = 0;
 var monsters = new Map([["ElmoMonster", false], ["BigBirdMonster", false], ["IrvineMonster", false], ["GroverMonster", false]])
+var monstersInputs = new Map([["ElmoMonster", "ElmoInput"], ["BigBirdMonster", "BigBirdInput"], ["IrvineMonster", "IrvineInput"], ["GroverMonster", "GroverInput"]])
 
 function settingsStartGame() {
-    gameTime = Number($("#TimeInput").val());
+    timeChosen = Number($("#TimeInput").val());
     numOfBalls = Number($("#BallsInput").val());
     upArrowName = $("#UPKey").val();
     downArrowName = $("#DOWNKey").val();
     rightArrowName = $("#RIGHTKey").val();
     leftArrowName = $("#LEFTKey").val();
+    ballColor5 = $("#5Color").val();
+    ballColor15 = $("#15Color").val();
+    ballColor25 = $("#25Color").val();
 
     // chcek at list one monster was chosen
     if (numberOfMonsters == 0) {
@@ -34,18 +42,110 @@ function settingsStartGame() {
         return;
     }
 
-    $("setting_page").hide();
-    $("game_page").show()
-    Start();
+    if (ballColor5 == ballColor15 || ballColor5 == ballColor25 || ballColor15 == ballColor25) {
+        alert("Please select diffrent colors.");
+        return;
+    }
+    goToGame();
+    return;
 }
 
 
 function settingsRandom() {
-    //set values
+    //reset values
+    resetSettings();
+    // Set randome game time
+    timeChosen = Math.floor(Math.random() * (121)) + 60;
+    $("#TimeInput").attr("value", timeChosen);
+    // Set randome number of balls
+    numOfBalls = Math.floor(Math.random() * (41)) + 50;
+    $("#BallsInput").attr("value", numOfBalls);
+
+    // Set Random Balls colors 
+    ballColor5 = getRandomColor();
+    $("#5Color").attr("value", ballColor5);
+    ballColor15 = getRandomColor();
+    while (ballColor15 == ballColor5) {
+        ballColor15 = getRandomColor();
+    }
+    $("#15Color").attr("value", ballColor15);
+    ballColor25 = getRandomColor();
+    while (ballColor25 == ballColor15 || ballColor25 == ballColor5) {
+        ballColor25 = getRandomColor();
+
+    }
+    $("#25Color").attr("value", ballColor25);
+
+    // Set Random Monsters number
+    numberOfMonsters = Math.floor(Math.random() * 4) + 1;
+    var counter = numberOfMonsters;
+    for (let [key, value] of monsters.entries()) {
+        if (counter > 0) {
+            monsterTagId = monstersInputs.get(key);
+            document.getElementById(monsterTagId).style.border = "1px solid grey";
+            $("#" + monsterTagId).attr("alt", "attr");
+            monsters.set(key, true);
+            counter--;
+        }
+        else {
+            break;
+        }
+    }
     //start game:
-    // $("#setting_page").hide();
-    // $("#game_page").show();
+    setTimeout(goToGame, 1000);
+    return;
 }
+
+function goToGame() {
+    var startGameCon = confirm("Would you like the start the game with the chosen settings?");
+    if (startGameCon == true) {
+        // Update Finale app setting 
+        gameTime = timeChosen;
+        ballsNum = numOfBalls;
+        monstersNum = numberOfMonsters;
+        choseenMonster = monsters;
+        color5Ball = ballColor5;
+        colo15rBall = ballColor15;
+        color25Ball = ballColor25;
+        resetSettings();
+        $("#setting_page").hide();
+        $("#game_page").show();
+        Start();
+        return;
+    }
+    return;
+}
+
+function resetSettings() {
+    // reset game setting input
+    document.getElementById('setting_form').reset();
+    $("#TimeInput").attr("value", 60);
+    $("#BallsInput").attr("value", 50);
+    // rest colors
+    $("#5Color").attr("value", "#9D6538");
+    $("#15Color").attr("value", "#CF9F6E");
+    $("#25Color").attr("value", "#DABE99");
+    // reset ElmoInput
+    document.getElementById('ElmoInput').style.border = "none";
+    $("#ElmoInput").attr("alt", "notSelected");
+    // reset BigBirdInput
+    document.getElementById('BigBirdInput').style.border = "none";
+    $("#BigBirdInput").attr("alt", "notSelected");
+    // reset IrvineInput
+    document.getElementById('IrvineInput').style.border = "none";
+    $("#IrvineInput").attr("alt", "notSelected");
+    // reset GroverInput
+    document.getElementById('GroverInput').style.border = "none";
+    $("#GroverInput").attr("alt", "notSelected");
+    // reset monsters counter to 0
+    numberOfMonsters = 0;
+}
+
+
+function getRandomColor() {
+    return "#" + Math.floor(Math.random() * 16777215).toString(16);
+}
+
 
 function selectMonster(monster) {
     var isSelected = monster.alt;

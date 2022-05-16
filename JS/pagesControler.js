@@ -25,12 +25,7 @@ $(document).ready(function () {
     //triggers in settings:
     $("#setStart").click(settingsStartGame);
     $("#setRandom").click(settingsRandom);
-
-    //settings - set monsters:
-    // $("#ElmoInput").click(selectMonster(this));
-    // $("#BigBirdInput").click(selectMonster(this));
-    // $("#IrvineInput").click(selectMonster(this));
-    // $("#GroverInput").click(selectMonster(this));
+    $("#setReset").click(resetSettings);
 
     //settings - set arrows:
     $("#UPKey").keydown(function (event) { setUpKey(this, event); });

@@ -16,7 +16,7 @@ function logInToSettings() {
 
     $("#login_page").hide();
     $("#setting_page").show();
-    document.getElementById('login_form').reset()
+    document.getElementById('login_form').reset();
 }
 
 
