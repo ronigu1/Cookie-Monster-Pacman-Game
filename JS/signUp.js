@@ -1,24 +1,3 @@
-
-function showHideFunc() {
-    var firstPass = $("#lbPasswordInput").attr("type");
-    if (firstPass == "password") {
-        $("#lbPasswordInput").attr("type", "text");
-    }
-    else {
-        $("#lbPasswordInput").attr("type", "password");
-    }
-}
-
-function showHideFuncConfirm() {
-    var confirmPass = $("#lbPasswordConInput").attr("type");
-    if (confirmPass == "password") {
-        $("#lbPasswordConInput").attr("type", "text");
-    }
-    else {
-        $("#lbPasswordConInput").attr("type", "password");
-    }
-}
-
 function signUpToLogIn() {
     //validion    
     var userName = $("#lbUsernameInput").val();
@@ -46,9 +25,9 @@ function signUpToLogIn() {
         alert("full name should contain only letters");
         return;
     }
+
     console.log("emails Before:" + emailList);
     console.log("dict Before:" + users_passwords.size);
-
 
     if (users_passwords.has(userName)) {
         alert("UserName already in use , please choose another one.");
@@ -59,27 +38,49 @@ function signUpToLogIn() {
         alert("Email adress already in use , please choose another one.");
         return;
     }
+
     //add to dictionary
-    var con = confirm("Do you coniform all deatails?");
-    if (con == true) {
-        users_passwords.set(userName, password);
-        // push to end of array
-        emailList.push(email);
-        // clear cells for next time
-        console.log("dict After:" + users_passwords.size);
-        console.log("emails After:" + emailList);
-        alert("Welcome to the Cookie-Man game. please Login to your new account");
-        //add to list
-        $("#signup_page").hide();
-        $("#login_page").show();
-        return;
-    }
-    else {
-        return false;
-    }
+    users_passwords.set(userName, password);
+
+    // push to end of array
+    emailList.push(email);
+    // clear cells for next time
+    console.log("dict After:" + users_passwords.size);
+    console.log("emails After:" + emailList);
+
+    alert("Welcome to the Cookie-Man game. please Login to your new account");
+    //add to list
+
+    $("#signup_page").hide();
+    $("#login_page").show();
+    document.getElementById('signup_form').reset()
+    // return;
+
 }
 
 function signUpReset() {
     //reset all cells
+}
+
+
+
+function showHideFunc() {
+    var firstPass = $("#lbPasswordInput").attr("type");
+    if (firstPass == "password") {
+        $("#lbPasswordInput").attr("type", "text");
+    }
+    else {
+        $("#lbPasswordInput").attr("type", "password");
+    }
+}
+
+function showHideFuncConfirm() {
+    var confirmPass = $("#lbPasswordConInput").attr("type");
+    if (confirmPass == "password") {
+        $("#lbPasswordConInput").attr("type", "text");
+    }
+    else {
+        $("#lbPasswordConInput").attr("type", "password");
+    }
 }
 

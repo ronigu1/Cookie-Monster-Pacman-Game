@@ -1,6 +1,5 @@
-// import { welcomeToSignUp, welcomeToLogIn } from "./welcome.js"
-var users_passwords = new Map([["k", "k"]]);
-var emailList = ["k@k.com"];
+var users_passwords = new Map([["k", "k"]]), emailList = [""];
+var emailList = [""];
 
 $(document).ready(function () {
     $("#signup_page").hide();
@@ -20,16 +19,22 @@ $(document).ready(function () {
     $("#showHideConfirm").click(showHideFuncConfirm);
 
     //triggers in logIn page:
-    //$("#liSubmit").click(logInToSettings);
+    $("#liSubmit").click(logInToSettings);
+    $("#showHideLogin").click(showHideLoginFunc);
 
     //triggers in settings:
     $("#setStart").click(settingsStartGame);
     $("#setRandom").click(settingsRandom);
-    $("#setReset").click(settingsReset);
+
+    //settings - set monsters:
+    // $("#ElmoInput").click(selectMonster(this));
+    // $("#BigBirdInput").click(selectMonster(this));
+    // $("#IrvineInput").click(selectMonster(this));
+    // $("#GroverInput").click(selectMonster(this));
 
     //settings - set arrows:
-    $("#UPKey").click(setUpKey);
-    $("#DOWNKey").click(setDOWNKey);
-    $("#RIGHTKey").click(setRIGHTKey);
-    $("#LEFTKey").click(setLEFTKey);
+    $("#UPKey").keydown(function (event) { setUpKey(this, event); });
+    $("#DOWNKey").keydown(function (event) { setDOWNKey(this, event); });
+    $("#RIGHTKey").keydown(function (event) { setRIGHTKey(this, event); });
+    $("#LEFTKey").keydown(function (event) { setLEFTKey(this, event); });
 });
