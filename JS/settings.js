@@ -6,7 +6,7 @@ var ballColor15;
 var ballColor25;
 
 var upArrow;
-var dowArrow;
+var downArrow;
 var rightArrow;
 var leftArrow;
 
@@ -91,11 +91,14 @@ function settingsRandom() {
             break;
         }
     }
+    leftArrow = 37;
+    upArrow = 38;
+    rightArrow = 39;
+    downArrow = 40;
     //start game:
     setTimeout(goToGame, 1000);
     return;
 }
-
 function goToGame() {
     var startGameCon = confirm("Would you like the start the game with the chosen settings?");
     if (startGameCon == true) {
@@ -123,8 +126,13 @@ function updateGamePage() {
     monstersNum = numberOfMonsters;
     choseenMonster = monsters;
     color5Ball = ballColor5;
-    colo15rBall = ballColor15;
+    color15Ball = ballColor15;
     color25Ball = ballColor25;
+    //buttons update from setting:
+	leftButtonCode = leftArrow;
+	upButtonCode = upArrow;
+	righttButtonCode = rightArrow;
+	downButtonCode = downArrow;
 
     $("#timeSet").attr("value", timeChosen);
     $("#Balls").attr("value", numOfBalls);
@@ -135,10 +143,14 @@ function updateGamePage() {
     $("#DOWNKeySet").attr("value", downArrowName);
     $("#RIGHTKeySet").attr("value", rightArrowName);
     $("#LEFTKeySet").attr("value", leftArrowName);
+    
     var counter = 1
+    monstersImgs = new Map();
     for (let [key, value] of monsters.entries()) {
         if (value == true) {
-            var imgSrc = $("#" + key).attr("src")
+            monstersImgs.set(counter,document.getElementById(key));
+            var imgSrc = $("#" + key).attr("src");
+
             $("#monster" + counter).attr("src", imgSrc);
             // $("#monster" + counter).attr("display", "block");
             document.getElementById("monster" + counter).style.display = "block";
@@ -204,25 +216,25 @@ function selectMonster(monster) {
 //set arrows
 function setUpKey(key, event) {
     $(key).val(event.code);
-    upArrow = event.which
+    upArrow = event.which;
     upArrowName = event.code;
 
 }
 
 function setDOWNKey(key, event) {
     $(key).val(event.code);
-    dowArrow = event.which
+    downArrow = event.which;
     downArrowName = event.code;
 }
 
 function setRIGHTKey(key, event) {
     $(key).val(event.code);
-    rightArrow = event.which
+    rightArrow = event.which;
     rightArrowName = event.code;
 }
 
 function setLEFTKey(key, event) {
     $(key).val(event.code);
-    leftArrow = event.which
+    leftArrow = event.which;
     leftArrowName = event.code;
 }
