@@ -12,11 +12,9 @@ function logInToSettings() {
         alert("Password is incorrect.");
         return;
     }
-
-
+    loggedUser = userName;
     $("#login_page").hide();
     $("#setting_page").show();
-    document.getElementById('login_form').reset();
 }
 
 

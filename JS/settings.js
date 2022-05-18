@@ -1,38 +1,25 @@
-var timeChosen;
-var numOfBalls;
-
-var ballColor5;
-var ballColor15;
-var ballColor25;
-
-var upArrow;
-var downArrow;
-var rightArrow;
-var leftArrow;
-
+var loggedUser;
 var upArrowName;
 var downArrowName;
 var rightArrowName;
 var leftArrowName;
 
-
-var numberOfMonsters = 0;
 var monsters = new Map([["ElmoMonster", false], ["BigBirdMonster", false], ["IrvineMonster", false], ["GroverMonster", false]])
 var monstersInputs = new Map([["ElmoMonster", "ElmoInput"], ["BigBirdMonster", "BigBirdInput"], ["IrvineMonster", "IrvineInput"], ["GroverMonster", "GroverInput"]])
 
 function settingsStartGame() {
-    timeChosen = Number($("#TimeInput").val());
-    numOfBalls = Number($("#BallsInput").val());
+    gameTime = Number($("#TimeInput").val());
+    ballsNum = Number($("#BallsInput").val());
     upArrowName = $("#UPKey").val();
     downArrowName = $("#DOWNKey").val();
     rightArrowName = $("#RIGHTKey").val();
     leftArrowName = $("#LEFTKey").val();
-    ballColor5 = $("#5Color").val();
-    ballColor15 = $("#15Color").val();
-    ballColor25 = $("#25Color").val();
+    color5Ball = $("#5Color").val();
+    color15Ball = $("#15Color").val();
+    color25Ball = $("#25Color").val();
 
     // chcek at list one monster was chosen
-    if (numberOfMonsters == 0) {
+    if (monstersNum == 0) {
         alert("Please select at list one pursuer.");
         return;
     }
@@ -42,7 +29,7 @@ function settingsStartGame() {
         return;
     }
 
-    if (ballColor5 == ballColor15 || ballColor5 == ballColor25 || ballColor15 == ballColor25) {
+    if (color5Ball == color15Ball || color5Ball == color25Ball || color15Ball == color25Ball) {
         alert("Please select diffrent colors.");
         return;
     }
@@ -55,30 +42,36 @@ function settingsRandom() {
     //reset values
     resetSettings();
     // Set randome game time
-    timeChosen = Math.floor(Math.random() * (121)) + 60;
-    $("#TimeInput").attr("value", timeChosen);
+    gameTime = Math.floor(Math.random() * (121)) + 60;
+    $("#TimeInput").attr("value", gameTime);
     // Set randome number of balls
-    numOfBalls = Math.floor(Math.random() * (41)) + 50;
-    $("#BallsInput").attr("value", numOfBalls);
+    ballsNum = Math.floor(Math.random() * (41)) + 50;
+    $("#BallsInput").attr("value", ballsNum);
+
+    // Set game keys
+    upArrowName = $("#UPKey").val();
+    downArrowName = $("#DOWNKey").val();
+    rightArrowName = $("#RIGHTKey").val();
+    leftArrowName = $("#LEFTKey").val();
 
     // Set Random Balls colors 
-    ballColor5 = getRandomColor();
-    $("#5Color").attr("value", ballColor5);
-    ballColor15 = getRandomColor();
-    while (ballColor15 == ballColor5) {
-        ballColor15 = getRandomColor();
+    color5Ball = getRandomColor();
+    $("#5Color").attr("value", color5Ball);
+    color15Ball = getRandomColor();
+    while (color15Ball == color5Ball) {
+        color15Ball = getRandomColor();
     }
-    $("#15Color").attr("value", ballColor15);
-    ballColor25 = getRandomColor();
-    while (ballColor25 == ballColor15 || ballColor25 == ballColor5) {
-        ballColor25 = getRandomColor();
+    $("#15Color").attr("value", color15Ball);
+    color25Ball = getRandomColor();
+    while (color25Ball == color15Ball || color25Ball == color5Ball) {
+        color25Ball = getRandomColor();
 
     }
-    $("#25Color").attr("value", ballColor25);
+    $("#25Color").attr("value", color25Ball);
 
     // Set Random Monsters number
-    numberOfMonsters = Math.floor(Math.random() * 4) + 1;
-    var counter = numberOfMonsters;
+    monstersNum = Math.floor(Math.random() * 4) + 1;
+    var counter = monstersNum;
     for (let [key, value] of monsters.entries()) {
         if (counter > 0) {
             monsterTagId = monstersInputs.get(key);
@@ -91,12 +84,12 @@ function settingsRandom() {
             break;
         }
     }
-    leftArrow = 37;
-    upArrow = 38;
-    rightArrow = 39;
-    downArrow = 40;
+    leftButtonCode = 37;
+    upButtonCode = 38;
+    righttButtonCode = 39;
+    downButtonCode = 40;
     //start game:
-    setTimeout(goToGame, 1000);
+    setTimeout(goToGame, 150);
     return;
 }
 function goToGame() {
@@ -104,13 +97,6 @@ function goToGame() {
     if (startGameCon == true) {
         // Update Finale app setting 
         updateGamePage();
-        // gameTime = timeChosen;
-        // ballsNum = numOfBalls;
-        // monstersNum = numberOfMonsters;
-        // choseenMonster = monsters;
-        // color5Ball = ballColor5;
-        // colo15rBall = ballColor15;
-        // color25Ball = ballColor25;
         resetSettings();
         $("#setting_page").hide();
         $("#game_page").show();
@@ -121,38 +107,27 @@ function goToGame() {
 }
 
 function updateGamePage() {
-    gameTime = timeChosen;
-    ballsNum = numOfBalls;
-    monstersNum = numberOfMonsters;
     choseenMonster = monsters;
-    color5Ball = ballColor5;
-    color15Ball = ballColor15;
-    color25Ball = ballColor25;
-    //buttons update from setting:
-	leftButtonCode = leftArrow;
-	upButtonCode = upArrow;
-	righttButtonCode = rightArrow;
-	downButtonCode = downArrow;
-
-    $("#timeSet").attr("value", timeChosen);
-    $("#Balls").attr("value", numOfBalls);
-    document.getElementById('5BallColor').style.backgroundColor = ballColor5;
-    document.getElementById('15BallColor').style.backgroundColor = ballColor15;
-    document.getElementById('25BallColor').style.backgroundColor = ballColor25;
+    lbUsername.value = loggedUser;
+    lbHighScore.value = users_highScore.get(loggedUser);
+    higestScore = users_highScore.get(loggedUser);
+    $("#timeSet").attr("value", gameTime);
+    $("#Balls").attr("value", ballsNum);
+    document.getElementById('5BallColor').style.backgroundColor = color5Ball;
+    document.getElementById('15BallColor').style.backgroundColor = color15Ball;
+    document.getElementById('25BallColor').style.backgroundColor = color25Ball;
     $("#UPKeySet").attr("value", upArrowName);
     $("#DOWNKeySet").attr("value", downArrowName);
     $("#RIGHTKeySet").attr("value", rightArrowName);
     $("#LEFTKeySet").attr("value", leftArrowName);
-    
+
     var counter = 1
     monstersImgs = new Map();
     for (let [key, value] of monsters.entries()) {
         if (value == true) {
-            monstersImgs.set(counter,document.getElementById(key));
+            monstersImgs.set(counter, document.getElementById(key));
             var imgSrc = $("#" + key).attr("src");
-
             $("#monster" + counter).attr("src", imgSrc);
-            // $("#monster" + counter).attr("display", "block");
             document.getElementById("monster" + counter).style.display = "block";
             counter++;
         }
@@ -182,7 +157,7 @@ function resetSettings() {
     document.getElementById('GroverInput').style.border = "none";
     $("#GroverInput").attr("alt", "notSelected");
     // reset monsters counter to 0
-    numberOfMonsters = 0;
+    monstersNum = 0;
 }
 
 
@@ -200,41 +175,40 @@ function selectMonster(monster) {
         monster.alt = "notSelected";
         monster.style.border = "none";
         monsters.set(name, false);
-        numberOfMonsters = numberOfMonsters - 1;
+        monstersNum = monstersNum - 1;
     }
     else {
         monster.alt = "selected";
         monster.style.border = "1px solid grey";
         monsters.set(name, true);
-        numberOfMonsters = numberOfMonsters + 1;
+        monstersNum = monstersNum + 1;
     }
     console.log("Map Values:" + Array.from(monsters.entries(), ([k, v]) => `\n  ${k}: ${v}`).join("") + "\n");
-    console.log("Number Of Monsters:" + numberOfMonsters)
+    console.log("Number Of Monsters:" + monstersNum)
 }
 
 
 //set arrows
 function setUpKey(key, event) {
     $(key).val(event.code);
-    upArrow = event.which;
+    upButtonCode = event.which;
     upArrowName = event.code;
-
 }
 
 function setDOWNKey(key, event) {
     $(key).val(event.code);
-    downArrow = event.which;
+    downButtonCode = event.which;
     downArrowName = event.code;
 }
 
 function setRIGHTKey(key, event) {
     $(key).val(event.code);
-    rightArrow = event.which;
+    righttButtonCode = event.which;
     rightArrowName = event.code;
 }
 
 function setLEFTKey(key, event) {
     $(key).val(event.code);
-    leftArrow = event.which;
+    leftButtonCode = event.which;
     leftArrowName = event.code;
 }
