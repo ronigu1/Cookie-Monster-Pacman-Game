@@ -7,12 +7,13 @@ var timeElapsed;
 var interval;
 var canvasHeight;
 var canvasWidth;
-var canvasCellCenterOffset;
+// var canvasCellCenterOffset;
 var canvasCellRadius;
 var canvasCell;
 var sizeOfBoard
 var halfOfBoard;
-// var lostLife = false;
+var gameCompleted;
+var lostLife = false;
 var firstTime;
 var gameRuning;
 var higestScore;
@@ -87,6 +88,7 @@ function Start() {
 	//to change: ballsNum,monstersNum,
 	// settngs:
 	ballsNum = 60;
+	gameTime ;
 	// var balls_remain = ballsNum;
 	// var pacman_remain = 1;
 	// var cookies_bonus_remain = 1
@@ -102,6 +104,7 @@ function Start() {
 	surpriseRemain = 2;
 	cookieLifeRemain = 1;
 	lifeGameRemain = 5;
+	gameCompleted = false;
 	ball25Remain = Math.floor(ballsRemain * 0.6);
 	ball15Remain = Math.floor(ballsRemain * 0.3);
 	ball5Remain = Math.floor(ballsRemain * 0.1);
@@ -126,9 +129,9 @@ function Start() {
 	canvasHeight = canvas.height;//600
 	canvasWidth = canvas.width;//600
 	canvasCell = canvasWidth/sizeOfBoard;//50
-	canvasCellCenterOffset = canvasCell/2
 	canvasCellRadius = canvasCell/2;
-
+	monsterXYcenter = [[0,0],[0,(sizeOfBoard-1)],[(sizeOfBoard-1),0],[(sizeOfBoard-1)],(sizeOfBoard-1)];
+	monsterLastMoveArr = [null,null,null,null];
 	let randomNum_0_to_7_1 = Math.floor(Math.random() * 8);
 	let randomNum_0_to_7_2 = Math.floor(Math.random() * 8);
 	let randomNum_0_to_7_3 = Math.floor(Math.random() * 8);
@@ -166,13 +169,13 @@ function Start() {
 				board[i][j] = "wall";//4
 				}
 				// monsters:
-			// else if((i == 0 && j == 0)||
-			// 	(i == 0 && j == (sizeOfBoard-1))||
-			// 	(i == (sizeOfBoard-1) && j == 0)||
-			// 	(i == (sizeOfBoard-1) && j == (sizeOfBoard-1))){
-			// 	board[i][j] = "" //1
-			// 	// board[i][j] = "monsterHere";
-			// 	}
+			else if((i == 0 && j == 0)||
+				(i == 0 && j == (sizeOfBoard-1))||
+				(i == (sizeOfBoard-1) && j == 0)||
+				(i == (sizeOfBoard-1) && j == (sizeOfBoard-1))){
+				board[i][j] = "monster" //1
+				// board[i][j] = "monster";
+				}
 			else{
 				var randomNum = Math.random();
 				//balls:
@@ -261,7 +264,8 @@ function Start() {
 			ball15Remain--;
 			ballsRemain--;
 		}
-		if(ball5Remain > 0){
+		// if(ball5Remain > 0){
+		else{
 			board[emptyCellForBall[0]][emptyCellForBall[1]] = "color5Ball";
 			ball5Remain--;
 			ballsRemain--;
@@ -274,9 +278,9 @@ function Start() {
 	}
 	if (bonusCoockieRemain > 0){
 		let emptyCellForBonusCoockie = findRandomEmptyCell(board);
-		bonusCoockieI = emptyCellForSurprise[0];
-		bonusCoockieJ = emptyCellForSurprise[1];
-		board[emptyCellForBonusCoockie[0]][emptyCellForBonusCoockie[1]] = "bonusCoockie";
+		bonusCoockieI = emptyCellForBonusCoockie[0];
+		bonusCoockieJ = emptyCellForBonusCoockie[1];
+		board[bonusCoockieI][bonusCoockieJ] = "bonusCoockie";
 		bonusCoockieRemain--;
 	}
 	if (cookieLifeRemain > 0){
@@ -299,7 +303,8 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 150);
+	gameRuning = true;
+	interval = setInterval(UpdatePosition, 100);
 }
 
 function findRandomEmptyCell(board) {
@@ -339,8 +344,8 @@ function Draw() {
 	for (var i = 0; i < sizeOfBoard; i++) {
 		for (var j = 0; j < sizeOfBoard; j++) {
 			var center = new Object();
-			center.x = i * canvasCell + canvasCellCenterOffset;
-			center.y = j * canvasCell + canvasCellCenterOffset;
+			center.x = i * canvasCell + canvasCellRadius;
+			center.y = j * canvasCell + canvasCellRadius;
 			if (board[i][j] === "color25Ball"){
 				Draw25Ball(center.x,center.y);
 			}
@@ -370,6 +375,7 @@ function Draw() {
 			}	
 		}
 	}
+	DrawAllMonsters();
 }
 
 //drawing balls:
@@ -414,10 +420,17 @@ function DrawCoockieLife(centerX,centerY){
 function DrawSurprise(centerX,centerY){
 	context.drawImage(surpriseImg, centerX-canvasCellRadius/1.5, centerY-canvasCellRadius/1.5, canvasCellRadius*1.5, canvasCellRadius*1.5);
 }
-// function DrawMonster(centerX,centerY){
-// }
-
-
+function DrawAllMonsters(){
+	for (let i=1; i<=monstersImgs.size; i++){
+	//monsterXYcenter = [[0,0],[0,(sizeOfBoard-1)],[(sizeOfBoard-1),0],[(sizeOfBoard-1)],(sizeOfBoard-1)];
+		let monsterCenterX = monsterXYcenter[i][0]*canvasCell+canvasCellRadius;
+		let monsterCenterY = monsterXYcenter[i][1]*canvasCell+canvasCellRadius;
+		DrawMonster(monsterCenterX,monsterCenterY);
+	}
+}
+function DrawMonster(centerX,centerY){
+	context.drawImage(surpriseImg, centerX-canvasCellRadius/1.5, centerY-canvasCellRadius/1.5, canvasCellRadius*1.5, canvasCellRadius*1.5);
+}
 
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
@@ -449,22 +462,22 @@ function UpdatePosition() {
 	if (board[shape.i][shape.j] == "color5Ball" ) {
 		score += 5;
 	}
-	if (board[shape.i][shape.j] == "color15Ball" ) {
+	else if (board[shape.i][shape.j] == "color15Ball" ) {
 		score += 15;
 	}
-	if (board[shape.i][shape.j] == "color25Ball" ) {
+	else if (board[shape.i][shape.j] == "color25Ball" ) {
 		score += 25;
 	}
-	if (board[shape.i][shape.j] == "bonusCoockie" ) {
+	else if (board[shape.i][shape.j] == "bonusCoockie" ) {
 		score += 50;
 	}
-	if (board[shape.i][shape.j] == "surprise") {
+	else if (board[shape.i][shape.j] == "surprise") {
 		rand = Math.floor(Math.random() * 2);
-		if(rand==1){
-			score += 50;
+		if(rand){
+			score += 70;
 		}
 		else{
-			score -= 50;
+			score -= 70;
 		}
 	}
 	if (board[shape.i][shape.j] == "cookieLife" ) {
@@ -472,25 +485,108 @@ function UpdatePosition() {
 		cookieLifeEaten = true;
 		updateLifeSetting();
 	}
-
 	board[shape.i][shape.j] = "pacman";
+	// UpdateMonsterPosition();
 	var currentTime = new Date();
 	timeElapsed = (currentTime - startTime) / 1000;
-	if (score >= 20 && timeElapsed <= 10) {
-		pacColor = "green";
-	}
-	if (score == 50) {
+	//time over
+	if (timeElapsed >= gameTime){
 		window.clearInterval(interval);
-		window.alert("Game completed");
-	} else {
-		Draw();
+		gameRuning = false;
+		//looser
+		if (score < 100){
+			let looserMessage = "You are Better Than " + score.toString() + " points!♥";
+			alert(looserMessage);
+			return;
+		}
+		//winner
+		else{
+			alert("Winner!");
+			return;
+		}
+	}
+	else{
+		if((numberOfMonsters > 0 && monsterXYcenter[0][0] == shape.i && monsterXYcenter[0][1] == shape.j)||
+		(numberOfMonsters > 1 &&  monsterXYcenter[1][0] == shape.i && monsterXYcenter[1][1] == shape.j)||
+		(numberOfMonsters > 2 &&  monsterXYcenter[2][0] == shape.i && monsterXYcenter[2][1] == shape.j)||
+		(numberOfMonsters > 2 &&  monsterXYcenter[3][0] == shape.i && monsterXYcenter[3][1] == shape.j)
+		){
+			lifeGameRemain--;
+			score-=10;
+			if(lifeGameRemain<=0){
+				window.clearInterval(interval);
+				window.alert("loser!");
+				gameRuning = false;
+			}
+			else{
+				board[shape.i][shape.j] = "empty";
+				let emptyCellForPacman = findRandomEmptyCell(board);
+				shape.i = emptyCellForPacman[0];
+				shape.j = emptyCellForPacman[1];
+				board[shape.i,shape.j] = "pacman";
+				shape.direction = "Right";
+				monsterXYcenter = [[0,0],[0,(sizeOfBoard-1)],[(sizeOfBoard-1),0],[(sizeOfBoard-1)],(sizeOfBoard-1)];
+				monsterLastMoveArr = [null,null,null,null];
+				updateLifeSetting();
+				lostLife = true;
+			}
+		}
+		if (lostLife){
+			lostLife = false;
+			window.clearInterval(interval);
+			//music
+			syncDelay(2000);
+			interval = setInterval(UpdatePosition, 200);
+		}
+		else if(firstTime){
+			Draw();
+			firstTime = false;
+			//music
+			window.clearInterval(interval);
+			setTimeout(function(){ interval = setInterval(UpdatePosition, 200); }, 5000);
+		}
+		else {
+			Draw();
+		}
 	}
 }
 
-// function updateLifeSetting(){
-// 	let imgNumTemp = lifeGameRemain;
-// 	if (cookieLifeEaten){
-// 		let lifeToAdd = "life" + imgNumTemp;
-		
-// 	}
+function syncDelay(milliseconds){
+	let start = new Date().getTime();
+	let end=0;
+	while( (end-start) < milliseconds){
+		end = new Date().getTime();
+	}
+}
+
+function stopGame(){
+	if(gameRuning){
+		window.clearInterval(interval);
+		// pauseAudio(gameSong)
+	}
+}
+
+function updateLifeSetting(){
+	let imgNumTemp = lifeGameRemain;
+	let lifeToAdd;
+	if (cookieLifeEaten){
+		lifeToAdd = "life" + imgNumTemp;
+		// lifeToAdd.style.display = "block";
+		document.getElementById(lifeToAdd).style.display = "block";
+		cookieLifeEaten = false;
+	}
+	else{
+		lifeToAdd = "life" + (imgNumTemp+1);
+		document.getElementById(lifeToAdd).style.display = "none";
+	}
+}
+
+function newGameHandler(){
+	// stop currect game
+	stopGame();
+	// switch to settings div
+	$("#game_page").hide();
+	$("#game_setting").show();		
+}
+// function UpdateMonsterPosition(){
 // }
