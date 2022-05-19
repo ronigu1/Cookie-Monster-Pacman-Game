@@ -33,5 +33,6 @@ $(document).ready(function () {
 
 // function gameToSettings() {
 //     $(game_page).hide();
+//     resetSettings();
 //     $(setting_page).hide();
 // }

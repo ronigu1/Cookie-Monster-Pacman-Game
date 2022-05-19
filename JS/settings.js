@@ -8,6 +8,7 @@ var monsters = new Map([["ElmoMonster", false], ["BigBirdMonster", false], ["Irv
 var monstersInputs = new Map([["ElmoMonster", "ElmoInput"], ["BigBirdMonster", "BigBirdInput"], ["IrvineMonster", "IrvineInput"], ["GroverMonster", "GroverInput"]])
 
 function settingsStartGame() {
+
     gameTime = Number($("#TimeInput").val());
     ballsNum = Number($("#BallsInput").val());
     upArrowName = $("#UPKey").val();
@@ -92,12 +93,13 @@ function settingsRandom() {
     setTimeout(goToGame, 150);
     return;
 }
+
 function goToGame() {
     var startGameCon = confirm("Would you like the start the game with the chosen settings?");
     if (startGameCon == true) {
         // Update Finale app setting 
         updateGamePage();
-        resetSettings();
+        // resetSettings();
         $("#setting_page").hide();
         $("#game_page").show();
         Start();

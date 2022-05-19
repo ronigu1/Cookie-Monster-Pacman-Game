@@ -14,6 +14,7 @@ function logInToSettings() {
     }
     loggedUser = userName;
     $("#login_page").hide();
+    resetSettings();
     $("#setting_page").show();
 }
 
