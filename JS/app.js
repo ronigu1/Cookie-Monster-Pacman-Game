@@ -15,7 +15,7 @@ var halfOfBoard;
 var gameCompleted;
 var lostLife = false;
 var firstTime;
-var gameRuning;
+// var gameRuning;
 var higestScore;
 var maxScore;
 //settingsDefine:
@@ -79,6 +79,7 @@ var downButtonCode;
 
 //setting in the side:
 var userName;
+var gameMusic;
 //music&sound:
 // $(document).ready(function() {
 // 	Start();
@@ -86,14 +87,20 @@ var userName;
 
 // stop the game and clear intrval for board update
 function Stop() {
-	if (gameRuning) {
-		window.clearInterval(interval);
-		// pauseAudio(gameSong)
-		if (score > higestScore) {
-			users_highScore.set(loggedUser, score);
-		}
-		// return;
+	window.clearInterval(interval);
+	pauseMusic(gameMusic);
+	if (score > higestScore) {
+		users_highScore.set(loggedUser, score);
 	}
+	// if (gameRuning) {
+	// 	window.clearInterval(interval);
+	// 	pauseMusic(gameMusic);
+	// 	if (score > higestScore) {
+	// 		users_highScore.set(loggedUser, score);
+	// 	}
+	// 	// return;
+	// }
+
 }
 
 // start the game with const intrval for board update
@@ -103,6 +110,7 @@ function Start() {
 	score = 0;
 	var cnt = 100;
 	// settngs:
+	bonusCoockieEaten = false;
 	ballsRemain = ballsNum;
 	cookieLifeEaten = false;
 	pacmanRemain = 1;
@@ -114,7 +122,7 @@ function Start() {
 	ball25Remain = Math.floor(ballsRemain * 0.1);
 	ball15Remain = Math.floor(ballsRemain * 0.3);
 	ball5Remain = Math.floor(ballsRemain * 0.6);
-	maxScore = ball25Remain * 25 + ball15Remain * 15 + ball5Remain * 5;
+	maxScore = bonusCoockieRemain * 50 + ball25Remain * 25 + ball15Remain * 15 + ball5Remain * 5;
 	//add images:
 	pacmanImg = document.getElementById("CookieMan");
 	pacmanUpImg = document.getElementById("CookieManUp");
@@ -123,6 +131,7 @@ function Start() {
 	bonusCoockieImg = document.getElementById("BonusCookie");
 	surpriseImg = document.getElementById("Surprise");
 	cookieLifeImg = document.getElementById("BonusLife");
+	gameMusic = document.getElementById("gameAudio");
 	startTime = new Date();
 	sizeOfBoard = 12;
 	halfOfBoard = sizeOfBoard / 2;
@@ -291,7 +300,7 @@ function Start() {
 		},
 		false
 	);
-	gameRuning = true;
+	// gameRuning = true;
 	interval = setInterval(UpdatePosition, 100);
 }
 
@@ -463,14 +472,18 @@ function UpdatePosition() {
 	}
 	else if (board[shape.i][shape.j] == "bonusCoockie") {
 		score += 50;
+		bonusCoockieEaten = true;
 	}
 	else if (board[shape.i][shape.j] == "surprise") {
 		rand = Math.floor(Math.random() * 2);
 		if (rand) {
 			score += 70;
+			maxScore += 70;
 		}
 		else {
 			score -= 70;
+			maxScore -= 70;
+
 		}
 	}
 	if (board[shape.i][shape.j] == "cookieLife") {
@@ -480,7 +493,7 @@ function UpdatePosition() {
 	}
 	if (cookieStep < pacmanStepCookie) {
 		cookieStep++;
-	} else if (bonusCoockieRemain > 0) {
+	} else if (!bonusCoockieEaten) {
 		UpdateCookieBonusPosition();
 		cookieStep = 0;
 	}
@@ -499,25 +512,27 @@ function UpdatePosition() {
 	timeElapsed = (currentTime - startTime) / 1000;
 	//time over
 	if (score >= maxScore) {
+		// gameRuning = false;
 		window.clearInterval(interval);
-		gameRuning = false;
 		alert("Winner!");
-		return;
+		Stop();
+		// return;
 	}
 	if (timeElapsed >= gameTime) {
 		window.clearInterval(interval);
-		gameRuning = false;
+		// gameRuning = false;
 		//looser
 		if (score < 100) {
 			let notWinnerMessage = "You are Better Than " + score.toString() + " points!♥";
 			alert(notWinnerMessage);
-			return;
+			// return;
 		}
 		//winner
 		else {
 			alert("Winner!");
-			return;
+			// return;
 		}
+		Stop();
 	}
 	else {
 		if ((monstersNum > 0 && monsterXYcenter[0][0] == shape.i && monsterXYcenter[0][1] == shape.j) ||
@@ -527,12 +542,14 @@ function UpdatePosition() {
 		) {
 			lifeGameRemain--;
 			score -= 10;
+			maxScore -= 10;
 			if (lifeGameRemain <= 0) {
 				window.clearInterval(interval);
 				updateLifeSetting();
 				window.alert("loser!");
-				gameRuning = false;
-				return;
+				// gameRuning = false;
+				Stop();
+				// return;
 			}
 			else {
 				board[shape.i][shape.j] = "empty";
@@ -562,15 +579,25 @@ function UpdatePosition() {
 			Draw();
 			firstTime = false;
 			//music
+			// $("#music").unbind("click").on("click", function () {
+			// 	$("#video").get(0).play();
+			// });
 			window.clearInterval(interval);
 			setTimeout(function () { interval = setInterval(UpdatePosition, 200); }, 1000);
+			setTimeout(function(){playMusic(gameMusic);},1000);
 		}
 		else {
 			Draw();
 		}
 	}
 }
+function playMusic(src) { 
+	src.play(); 
+} 
 
+function pauseMusic(src) { 
+	src.pause(); 
+} 
 function updateLifeSetting() {
 	let imgNumTemp = lifeGameRemain;
 	let lifeToAdd;
@@ -594,12 +621,19 @@ function UpdateCookieBonusPosition() {
 	board[bonusCoockieI][bonusCoockieJ] = "bonusCoockie";
 }
 
-function newGameHandler() {
-	// stop currect game
+// function newGameHandler() {
+// 	// stop currect game
+// 	Stop();
+// 	// switch to settings div
+// 	$("#game_page").hide();
+// 	$("#game_setting").show();
+// }
+
+function gameToSettings() {
 	Stop();
-	// switch to settings div
-	$("#game_page").hide();
-	$("#game_setting").show();
+    $(game_page).hide();
+    resetSettings();
+    $(setting_page).show();
 }
 
 function UpdateMonsterPosition() {

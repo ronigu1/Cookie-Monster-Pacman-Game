@@ -28,7 +28,7 @@ $(document).ready(function () {
     $("#LEFTKey").keydown(function (event) { setLEFTKey(this, event); });
 
     // triggers in Game page
-    // $('#newGameButton').click(gameToSettings);
+    $('#newGameButton').click(gameToSettings);
 });
 
 // function gameToSettings() {
