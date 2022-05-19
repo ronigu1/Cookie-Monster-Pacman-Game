@@ -30,6 +30,13 @@ function settingsStartGame() {
         return;
     }
 
+    if (typeof upArrowName === 'undefined' || typeof rightArrowName === 'undefined' || typeof downArrowName === 'undefined' || typeof leftArrowName === 'undefined') {
+        leftButtonCode = 37;
+        upButtonCode = 38;
+        righttButtonCode = 39;
+        downButtonCode = 40;
+    }
+
     if (color5Ball == color15Ball || color5Ball == color25Ball || color15Ball == color25Ball) {
         alert("Please select diffrent colors.");
         return;
@@ -147,19 +154,46 @@ function resetSettings() {
     $("#15Color").attr("value", "#CF9F6E");
     $("#25Color").attr("value", "#DABE99");
     // reset ElmoInput
-    document.getElementById('ElmoInput').style.border = "none";
-    $("#ElmoInput").attr("alt", "notSelected");
-    // reset BigBirdInput
-    document.getElementById('BigBirdInput').style.border = "none";
-    $("#BigBirdInput").attr("alt", "notSelected");
-    // reset IrvineInput
-    document.getElementById('IrvineInput').style.border = "none";
-    $("#IrvineInput").attr("alt", "notSelected");
-    // reset GroverInput
-    document.getElementById('GroverInput').style.border = "none";
-    $("#GroverInput").attr("alt", "notSelected");
+    let ElmoInputR = document.getElementById('ElmoInput');
+    let BigBirdInputR = document.getElementById('BigBirdInput');
+    let IrvineInputR = document.getElementById('IrvineInput');
+    let GroverInputR = document.getElementById('GroverInput');
+    //its the older code:
+    // document.getElementById('ElmoInput').style.border = "none";
+    // $("#ElmoInput").attr("alt", "notSelected");
+    // // reset BigBirdInput
+    // document.getElementById('BigBirdInput').style.border = "none";
+    // $("#BigBirdInput").attr("alt", "notSelected");
+    // // reset IrvineInput
+    // document.getElementById('IrvineInput').style.border = "none";
+    // $("#IrvineInput").attr("alt", "notSelected");
+    // // reset GroverInput
+    // document.getElementById('GroverInput').style.border = "none";
+    // $("#GroverInput").attr("alt", "notSelected");
+    
+    // monstersNum = 0;
+
+    // tryToFixMInstersShowingAfterNewGame :
+    resetMonstersFromGame(ElmoInputR);
+    resetMonstersFromGame(BigBirdInputR);
+    resetMonstersFromGame(IrvineInputR);
+    resetMonstersFromGame(GroverInputR);
+
+    //config button by defult:
+    leftButtonCode = 37;
+    upButtonCode = 38;
+    righttButtonCode = 39;
+    downButtonCode = 40;
+
     // reset monsters counter to 0
     monstersNum = 0;
+}
+
+function resetMonstersFromGame(monster){
+    var name = monster.src.split("/").pop().split(".")[0];
+    monster.alt = "notSelected";
+    monster.style.border = "none";
+    monsters.set(name, false);
 }
 
 

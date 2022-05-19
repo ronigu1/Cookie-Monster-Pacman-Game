@@ -88,7 +88,9 @@ var gameMusic;
 // stop the game and clear intrval for board update
 function Stop() {
 	window.clearInterval(interval);
-	pauseMusic(gameMusic);
+	if(typeof gameMusic !== 'undefined'){
+		pauseMusic(gameMusic);
+	}
 	if (score > higestScore) {
 		users_highScore.set(loggedUser, score);
 	}
