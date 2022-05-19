@@ -13,8 +13,8 @@ function logInToSettings() {
         return;
     }
     loggedUser = userName;
-    $("#login_page").hide();
     resetSettings();
+    $("#login_page").hide();
     $("#setting_page").show();
 }
 
