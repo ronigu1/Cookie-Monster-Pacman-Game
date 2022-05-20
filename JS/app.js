@@ -33,6 +33,7 @@ var monsterStep = 0;
 var pacmanStepMonster = 3;
 //Static balls(5,15,25)
 var ballsNum;
+var BallsTextSize;
 //the choosen colors:
 var ballsRemain;
 var color5Ball;
@@ -132,6 +133,7 @@ function Start() {
 	canvasWidth = canvas.width;//600
 	canvasCell = canvasWidth / sizeOfBoard;//50
 	canvasCellRadius = canvasCell / 2;
+	BallsTextSize = Math.floor(canvasCellRadius / 2);
 	monsterXYcenter = [[0, 0], [0, (sizeOfBoard - 1)], [(sizeOfBoard - 1), 0], [(sizeOfBoard - 1), (sizeOfBoard - 1)]];
 	monsterLastMoveArr = [null, null, null, null];
 	let randomNum_0_to_7_1 = Math.floor(Math.random() * 8);
@@ -169,6 +171,12 @@ function Start() {
 				(i == 7 && j == (sizeOfBoard - 2))) {
 				board[i][j] = "wall";//4
 			}
+			else if (i == 5 && j == 5) {
+				bonusCoockieRemain--;
+				bonusCoockieI = i;
+				bonusCoockieJ = j;
+				board[i][j] = "bonusCoockie";
+			}
 			// monsters:
 			else if ((i == 0 && j == 0) ||
 				(i == 0 && j == (sizeOfBoard - 1)) ||
@@ -203,14 +211,8 @@ function Start() {
 					}
 				}
 				//extras:		
-				else if (randomNum <= (1.0 * (bonusCoockieRemain + surpriseRemain + cookieLifeRemain + ballsRemain)) / cnt) {
-					if (randomNum_0_to_9 >= 3 && bonusCoockieRemain > 0) {
-						bonusCoockieRemain--;
-						bonusCoockieI = i;
-						bonusCoockieJ = j;
-						board[i][j] = "bonusCoockie";
-					}
-					else if (randomNum_0_to_9 >= 2 && cookieLifeRemain > 0) {
+				else if (randomNum <= (1.0 * (surpriseRemain + cookieLifeRemain + ballsRemain)) / cnt) {
+					if (randomNum_0_to_9 >= 2 && cookieLifeRemain > 0) {
 						cookieLifeRemain--;
 						cookieLifeI = i;
 						cookieLifeJ = j;
@@ -227,7 +229,7 @@ function Start() {
 					}
 				}
 				//pacman:								
-				else if (randomNum < (1.0 * (bonusCoockieRemain + surpriseRemain + cookieLifeRemain + pacmanRemain + ballsRemain) / cnt)) {
+				else if (randomNum < (1.0 * (surpriseRemain + cookieLifeRemain + pacmanRemain + ballsRemain) / cnt)) {
 					shape.i = i;
 					shape.j = j;
 					shape.direction = "Right";
@@ -270,13 +272,6 @@ function Start() {
 		let emptyCellForSurprise = findRandomEmptyCell(board);
 		board[emptyCellForSurprise[0]][emptyCellForSurprise[1]] = "surprise";
 		surpriseRemain--;
-	}
-	if (bonusCoockieRemain > 0) {
-		let emptyCellForBonusCoockie = findRandomEmptyCell(board);
-		bonusCoockieI = emptyCellForBonusCoockie[0];
-		bonusCoockieJ = emptyCellForBonusCoockie[1];
-		board[bonusCoockieI][bonusCoockieJ] = "bonusCoockie";
-		bonusCoockieRemain--;
 	}
 	if (cookieLifeRemain > 0) {
 		let emptyCellForCookieLife = findRandomEmptyCell(board);
@@ -329,7 +324,7 @@ function GetKeyPressed() {
 function Draw() {
 	canvas.width = canvas.width; //clean board
 	context.rect(0, 0, canvasWidth, canvasHeight);
-	context.fillStyle = "#b3e0ff";
+	context.fillStyle = "white";
 	context.fill();
 	lblScore.value = score;
 	lblTime.value = timeElapsed;
@@ -373,23 +368,36 @@ function Draw() {
 //drawing balls:
 function Draw25Ball(centerX, centerY) {
 	context.beginPath();
-	context.arc(centerX, centerY, canvasCell / 5, 0, 2 * Math.PI); // circle
+	context.arc(centerX, centerY, canvasCell / 3, 0, 2 * Math.PI); // circle
 	context.fillStyle = color25Ball; //color
 	context.fill();
+	context.font = 'bolder ' + BallsTextSize + 'pt Arial';
+	context.fillStyle = 'white';
+	context.textAlign = 'center';
+	context.fillText('+25', centerX, centerY + canvasCellRadius / 10);
+
 }
 
 function Draw15Ball(centerX, centerY) {
 	context.beginPath();
-	context.arc(centerX, centerY, canvasCell / 5, 0, 2 * Math.PI); // circle
+	context.arc(centerX, centerY, canvasCell / 3, 0, 2 * Math.PI); // circle
 	context.fillStyle = color15Ball; //color
 	context.fill();
+	context.font = 'bolder ' + BallsTextSize + 'pt Arial';
+	context.fillStyle = 'white';
+	context.textAlign = 'center';
+	context.fillText('+15', centerX, centerY + canvasCellRadius / 10);
 }
 
 function Draw5Ball(centerX, centerY) {
 	context.beginPath();
-	context.arc(centerX, centerY, canvasCell / 5, 0, 2 * Math.PI); // circle
+	context.arc(centerX, centerY, canvasCell / 3, 0, 2 * Math.PI); // circle
 	context.fillStyle = color5Ball; //color
 	context.fill();
+	context.font = 'bolder ' + BallsTextSize + 'pt Arial';
+	context.fillStyle = 'white';
+	context.textAlign = 'center';
+	context.fillText('+5', centerX, centerY + canvasCellRadius / 10);
 }
 
 function DrawPacman(centerX, centerY) {
@@ -559,6 +567,13 @@ function UpdatePosition() {
 				monsterXYcenter = [[0, 0], [0, (sizeOfBoard - 1)], [(sizeOfBoard - 1), 0], [(sizeOfBoard - 1), (sizeOfBoard - 1)]];
 				monsterLastMoveArr = [null, null, null, null];
 				updateLifeSetting();
+				// update cookieBonus position
+				if (!bonusCoockieEaten) {
+					board[bonusCoockieI][bonusCoockieJ] = "empty";
+					bonusCoockieI = 5;
+					bonusCoockieJ = 5;
+					board[5][5] = "bonusCoockie";
+				}
 				lostLife = true;
 			}
 		}

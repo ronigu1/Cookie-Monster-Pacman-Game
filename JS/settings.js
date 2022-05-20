@@ -41,6 +41,10 @@ function settingsStartGame() {
         alert("Please select diffrent colors.");
         return;
     }
+    if (color5Ball == "#ffffff" || color15Ball == "#ffffff" || color25Ball == "#ffffff") {
+        alert("Ball color canwt be white, please select diffrent color.");
+        return;
+    }
     goToGame();
     return;
 }
