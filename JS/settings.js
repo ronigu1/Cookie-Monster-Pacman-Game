@@ -29,12 +29,20 @@ function settingsStartGame() {
         alert("Please select diffrent keys.");
         return;
     }
-
     if (typeof upArrowName === 'undefined' || typeof rightArrowName === 'undefined' || typeof downArrowName === 'undefined' || typeof leftArrowName === 'undefined') {
         leftButtonCode = 37;
         upButtonCode = 38;
         righttButtonCode = 39;
         downButtonCode = 40;
+    }
+    if (gameTime < 60) {
+        alert("Time must be grater then 60.");
+        return;
+    }
+
+    if (ballsNum < 50 || ballsNum > 90) {
+        alert("Number of Balls between 50-90.");
+        return;
     }
 
     if (color5Ball == color15Ball || color5Ball == color25Ball || color15Ball == color25Ball) {
@@ -42,7 +50,7 @@ function settingsStartGame() {
         return;
     }
     if (color5Ball == "#ffffff" || color15Ball == "#ffffff" || color25Ball == "#ffffff") {
-        alert("Ball color canwt be white, please select diffrent color.");
+        alert("Ball color can't be white, please select diffrent color.");
         return;
     }
     goToGame();
