@@ -58,7 +58,6 @@ var surpriseI;
 var surpriseJ;
 var surpriseImg;
 //life cookie:
-var lifesCancas;
 var cookieLifeEaten;
 var cookieLifeRemain;
 var cookieLifeI;
@@ -88,21 +87,12 @@ var gameMusic;
 // stop the game and clear intrval for board update
 function Stop() {
 	window.clearInterval(interval);
-	if(typeof gameMusic !== 'undefined'){
+	if (typeof gameMusic !== 'undefined') {
 		pauseMusic(gameMusic);
 	}
 	if (score > higestScore) {
 		users_highScore.set(loggedUser, score);
 	}
-	// if (gameRuning) {
-	// 	window.clearInterval(interval);
-	// 	pauseMusic(gameMusic);
-	// 	if (score > higestScore) {
-	// 		users_highScore.set(loggedUser, score);
-	// 	}
-	// 	// return;
-	// }
-
 }
 
 // start the game with const intrval for board update
@@ -208,6 +198,9 @@ function Start() {
 						ball5Remain--;
 						board[i][j] = "color5Ball";
 					}
+					else {
+						board[i][j] = "empty";
+					}
 				}
 				//extras:		
 				else if (randomNum <= (1.0 * (bonusCoockieRemain + surpriseRemain + cookieLifeRemain + ballsRemain)) / cnt) {
@@ -228,6 +221,9 @@ function Start() {
 						surpriseI = i;
 						surpriseJ = j;
 						board[i][j] = "surprise";
+					}
+					else {
+						board[i][j] = "empty";
 					}
 				}
 				//pacman:								
@@ -363,7 +359,7 @@ function Draw() {
 			else if (board[i][j] === "surprise") {
 				DrawSurprise(center.x, center.y);
 			}
-			else if (board[i][j] == "wall") {
+			else if (board[i][j] === "wall") {
 				context.beginPath();
 				context.rect(center.x - canvasCellRadius, center.y - canvasCellRadius, canvasCell, canvasCell);
 				context.fillStyle = "grey";
@@ -586,20 +582,20 @@ function UpdatePosition() {
 			// });
 			window.clearInterval(interval);
 			setTimeout(function () { interval = setInterval(UpdatePosition, 200); }, 1000);
-			setTimeout(function(){playMusic(gameMusic);},1000);
+			setTimeout(function () { playMusic(gameMusic); }, 1000);
 		}
 		else {
 			Draw();
 		}
 	}
 }
-function playMusic(src) { 
-	src.play(); 
-} 
+function playMusic(src) {
+	src.play();
+}
 
-function pauseMusic(src) { 
-	src.pause(); 
-} 
+function pauseMusic(src) {
+	src.pause();
+}
 function updateLifeSetting() {
 	let imgNumTemp = lifeGameRemain;
 	let lifeToAdd;
@@ -633,9 +629,9 @@ function UpdateCookieBonusPosition() {
 
 function gameToSettings() {
 	Stop();
-    $(game_page).hide();
-    resetSettings();
-    $(setting_page).show();
+	$(game_page).hide();
+	resetSettings();
+	$(setting_page).show();
 }
 
 function UpdateMonsterPosition() {

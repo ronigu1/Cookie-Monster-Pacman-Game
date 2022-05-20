@@ -45,7 +45,6 @@ function settingsStartGame() {
     return;
 }
 
-
 function settingsRandom() {
     //reset values
     resetSettings();
@@ -92,10 +91,6 @@ function settingsRandom() {
             break;
         }
     }
-    leftButtonCode = 37;
-    upButtonCode = 38;
-    righttButtonCode = 39;
-    downButtonCode = 40;
     //start game:
     setTimeout(goToGame, 150);
     return;
@@ -147,37 +142,21 @@ function updateGamePage() {
 function resetSettings() {
     // reset game setting input
     document.getElementById('setting_form').reset();
+    gameTime = 60;
     $("#TimeInput").attr("value", 60);
+    ballsNum = 50;
     $("#BallsInput").attr("value", 50);
-    // rest colors
-    $("#5Color").attr("value", "#9D6538");
-    $("#15Color").attr("value", "#CF9F6E");
-    $("#25Color").attr("value", "#DABE99");
-    // reset ElmoInput
-    let ElmoInputR = document.getElementById('ElmoInput');
-    let BigBirdInputR = document.getElementById('BigBirdInput');
-    let IrvineInputR = document.getElementById('IrvineInput');
-    let GroverInputR = document.getElementById('GroverInput');
-    //its the older code:
-    // document.getElementById('ElmoInput').style.border = "none";
-    // $("#ElmoInput").attr("alt", "notSelected");
-    // // reset BigBirdInput
-    // document.getElementById('BigBirdInput').style.border = "none";
-    // $("#BigBirdInput").attr("alt", "notSelected");
-    // // reset IrvineInput
-    // document.getElementById('IrvineInput').style.border = "none";
-    // $("#IrvineInput").attr("alt", "notSelected");
-    // // reset GroverInput
-    // document.getElementById('GroverInput').style.border = "none";
-    // $("#GroverInput").attr("alt", "notSelected");
-    
-    // monstersNum = 0;
 
-    // tryToFixMInstersShowingAfterNewGame :
-    resetMonstersFromGame(ElmoInputR);
-    resetMonstersFromGame(BigBirdInputR);
-    resetMonstersFromGame(IrvineInputR);
-    resetMonstersFromGame(GroverInputR);
+    // rest colors
+    color5Ball = "#9D6538";
+    $("#5Color").attr("value", "#9D6538");
+    color15Ball = "#CF9F6E";
+    $("#15Color").attr("value", "#CF9F6E");
+    color25Ball = "#DABE99";
+    $("#25Color").attr("value", "#DABE99");
+
+    // reset all monsters:
+    resetMonstersFromGame();
 
     //config button by defult:
     leftButtonCode = 37;
@@ -185,20 +164,40 @@ function resetSettings() {
     righttButtonCode = 39;
     downButtonCode = 40;
 
-    // reset monsters counter to 0
-    monstersNum = 0;
+    //reset life
+    document.getElementById("life1").style.display = "block";
+    document.getElementById("life2").style.display = "block";
+    document.getElementById("life3").style.display = "block";
+    document.getElementById("life4").style.display = "block";
+    document.getElementById("life5").style.display = "block";
+    document.getElementById("life6").style.display = "none";
 }
 
-function resetMonstersFromGame(monster){
-    var name = monster.src.split("/").pop().split(".")[0];
-    monster.alt = "notSelected";
-    monster.style.border = "none";
-    monsters.set(name, false);
+function resetMonstersFromGame() {
+    monstersNum = 0;
+    var monstersNames = ["Elmo", "BigBird", "Irvine", "Grover"];
+    for (var i = 0; i < 4; i++) {
+        let name = monstersNames[i];
+        $("#" + name + "Input").attr("alt", "notSelected");
+        document.getElementById(name + "Input").style.border = "none";
+        monsters.set(name + "Monster", false);
+        let counter = i + 1;
+        var monsterImg = document.getElementById("monster" + counter);
+        if (monsterImg.style != "none") {
+            // monsterImg.src = "none";
+            monsterImg.style.display = "none";
+        }
+    }
 }
 
 
 function getRandomColor() {
-    return "#" + Math.floor(Math.random() * 16777215).toString(16);
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
 }
 
 
@@ -206,7 +205,7 @@ function selectMonster(monster) {
     var isSelected = monster.alt;
     var name = monster.src.split("/").pop().split(".")[0];
     console.log("Monster name:" + name);
-    // var monsterSrc = 
+
     if (isSelected == "selected") {
         monster.alt = "notSelected";
         monster.style.border = "none";
