@@ -122,3 +122,7 @@ input {
 #newGameDiv {
     margin-top: 12px;
 }
+
+.Monster {
+    display: none;
+}
